@@ -1,0 +1,54 @@
+节点数据源
+let nodesandedges = {
+  nodes: [
+    {
+      id: "0x2715",
+      category: "material",
+      label: "氨",
+      style: {
+        fill: "#AAD3F5",
+      },
+      labelCfg: {
+        style: {
+          fontSize: 16,
+        },
+      },
+      itemAttrs: [
+        {
+          id: "0x2717",
+          attrName: "分子量",
+          attrValue: "17.03",
+        },
+      ],
+    },
+    {
+      id: "0x2717",
+      label: "17.03",
+      category: "material_attr",
+    }
+  ],
+  edges: [
+    {
+      id: "0x2718-0x2717",
+      source: "0x2718",
+      target: "0x2717",
+      label: "分子量",
+      color: "#000",
+      style: {
+        lineWidth: 1,
+        lineAppendWidth: 3,
+        cursor: "pointer",
+        endArrow: {
+          path: G6.Arrow.triangle(),
+          fill: "#000",
+        },
+      },
+    },
+    {
+      id: "0x2715-0x2716",
+      source: "0x2715",
+      target: "0x2716",
+      label: "颜色",
+    },
+  ],
+};
