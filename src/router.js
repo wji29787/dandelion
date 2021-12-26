@@ -112,7 +112,7 @@ const routes = [
       {
         path: "SysManage",
         name: "SysManage",
-        component: RouterComponent,
+        component:  () => import('@/components/RouterComponent.vue'),
         meta: {
           title: "系统管理",
           icon: "",
