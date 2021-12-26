@@ -112,7 +112,7 @@ const routes = [
       {
         path: "SysManage",
         name: "SysManage",
-        component:  () => import('@/components/RouterComponent.vue'),
+        component: RouterComponent,
         meta: {
           title: "系统管理",
           icon: "",
@@ -122,7 +122,7 @@ const routes = [
           {
             path: "UserManage",
             name: "UserManage",
-            component:  import("./pages/SysManage/UserManage/index.vue"),
+            component: ()=> import("./pages/SysManage/UserManage/index.vue"),
             meta: {
               title: "用户管理",
               icon: "",
@@ -133,7 +133,7 @@ const routes = [
           {
             path: "LogManage",
             name: "LogManage",
-            component:  import("./pages/SysManage/LogManage/index.vue"),
+            component:  ()=>import("./pages/SysManage/LogManage/index.vue"),
             meta: {
               title: "日志管理",
               icon: "",
