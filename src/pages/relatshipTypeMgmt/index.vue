@@ -509,7 +509,7 @@ const cancelAttr=()=>{
   getAttrList();
 }
 onMounted(async () => {
-   message.info("属性保存成功");
+ 
   await loadCategoryList();
 });
 </script>

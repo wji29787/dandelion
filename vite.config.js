@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import VuePlugin from "@vitejs/plugin-vue";
 import ViteComponents from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import {
   AntDesignVueResolver,
   ElementPlusResolver,
@@ -35,6 +36,7 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver(), ElementPlusResolver()],
     }),
     VuePlugin(),
+    vueJsx()
     // viteCommonjs({
     //   // include: ["node_modules/@antv/g6", "node_modules/axios"],
     // }),

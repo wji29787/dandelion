@@ -1,4 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import RouterComponent from  '@/components/RouterComponent.vue'
+// 文档管理 DocManage
+// 数据管理 DataManage
+// 模型管理 ModelManage
+// 用户管理 UserManage
+// 系统管理 SysManage
+// 日志管理 LogManage
 
 const routes = [
   {
@@ -19,7 +26,7 @@ const routes = [
       icon: "",
       hidden: false,
     },
-    component: () => import("./pages/Main.vue"),
+    component: () => import("./pages/Main/index.vue"),
     beforeEnter: (to, from, next) => {
       if (!window.localStorage.getItem("token")) {
         next("/");
@@ -81,6 +88,60 @@ const routes = [
           icon: "",
           hidden: false,
         },
+      },
+      {
+        path: "DocManage",
+        name: "DocManage",
+        component: () => import("./pages/DocManage/index.vue"),
+        meta: {
+          title: "文档管理",
+          icon: "",
+          hidden: false,
+        },
+      },
+      {
+        path: "ModelManage",
+        name: "ModelManage",
+        component: () => import("./pages/ModelManage/index.vue"),
+        meta: {
+          title: "模型管理",
+          icon: "",
+          hidden: false,
+        },
+      },
+      {
+        path: "SysManage",
+        name: "SysManage",
+        component: RouterComponent,
+        meta: {
+          title: "系统管理",
+          icon: "",
+          hidden: false,
+        },
+        children:[
+          {
+            path: "UserManage",
+            name: "UserManage",
+            component:  import("./pages/SysManage/UserManage/index.vue"),
+            meta: {
+              title: "用户管理",
+              icon: "",
+              hidden: false,
+            },
+
+          },
+          {
+            path: "LogManage",
+            name: "LogManage",
+            component:  import("./pages/SysManage/LogManage/index.vue"),
+            meta: {
+              title: "日志管理",
+              icon: "",
+              hidden: false,
+            },
+
+          }
+        ]
       },
     ],
   },
