@@ -140,6 +140,17 @@ const routes = [
               hidden: false,
             },
 
+          },
+          {
+            path: "test",
+            name: "test",
+            component: () => import("./pages/test/index.vue"),
+            meta: {
+              title: "日志管理",
+              icon: "",
+              hidden: false,
+            },
+
           }
         ]
       },
