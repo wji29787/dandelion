@@ -64,7 +64,8 @@
             <template #title> 系统管理 </template>
             <a-menu-item key="UserManage">用户管理</a-menu-item>
             <a-menu-item key="LogManage">日志管理</a-menu-item>
-  
+            <a-menu-item key="test">地图</a-menu-item>
+
             <!-- <a-menu-item key="Map">地图管理</a-menu-item> -->
           </a-sub-menu>
         </a-menu>
