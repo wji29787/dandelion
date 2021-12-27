@@ -10,8 +10,8 @@
       </template>
      
       <template v-if="column.title === '操作'">
-          <a-button size="small" type="link" @click="setRole(row)">分配角色</a-button>
-          <a-button size="small" type="link" @click="editRole(row)">编辑</a-button>
+          <a-button size="small" type="link" @click="setRole(record)">分配角色</a-button>
+          <a-button size="small" type="link" @click="editRole(record)">编辑</a-button>
           <a-button size="small" type="link">删除</a-button>
       </template>
     </template>

@@ -1,10 +1,11 @@
 <template>
   <div>
     <a-table :columns="columns" :data-source="data" :row-selection="rowSelection">
-    <template #bodyCell="{ column, text }">
-      <template v-if="column.dataIndex === 'name'">
-        <a>{{ text }}</a>
+    <template #bodyCell="{ column,index }">
+      <template v-if="column.type === 'index'">
+        <span>{{ index+1 }}</span>
       </template>
+     
     </template>
   </a-table>
   </div>

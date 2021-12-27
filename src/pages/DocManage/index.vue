@@ -1,7 +1,7 @@
 <template>
   <div>
   <a-row :gutter="6">
-   <a-col :span="6">
+   <a-col :span="5">
       <a-input-search v-model:value="searchValue" style="margin-bottom: 8px" placeholder="Search" />
     <a-tree
       :expanded-keys="expandedKeys"
@@ -20,7 +20,7 @@
     </a-tree>
 
    </a-col>
-   <a-col :span="18">
+   <a-col :span="19">
       <a-space>
     
     <a-button type="primary">创建目录</a-button>
