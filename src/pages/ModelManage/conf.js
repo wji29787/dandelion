@@ -2,18 +2,18 @@ export const columns = [
     {
       title: '上传日期',
       dataIndex: 'uploadDate',
-      key: 'name',
+      key: 'uploadDate',
     },
     {
       title: '模型名称',
       dataIndex: 'address',
-      key: 'address 1',
+      key: 'address',
       ellipsis: true,
     },
     {
       title: '模型描述',
-      dataIndex: 'address',
-      key: 'address 2',
+      dataIndex: 'desc',
+      key: 'desc',
       ellipsis: true,
     },
     {
@@ -29,25 +29,28 @@ export const columns = [
     {
       key: '1',
       name: 'John Brown',
-      uploadDate:'2001-12-11',
+      uploadDate:'2021-11-21',
       age: 32,
-      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
+      address: '高斯烟团模型',
       tags: ['nice', 'developer'],
+      desc:'适用于瞬时泄漏的扩散模拟'
     },
     {
       key: '2',
       name: 'Jim Green',
-      uploadDate:'2001-12-11',
+      uploadDate:'2021-11-21',
       age: 42,
-      address: 'London No. 2 Lake Park, London No. 2 Lake Park',
+      address: '高斯烟雨模型',
       tags: ['loser'],
+      desc:'适用于5排放的扩散连续扩散模拟'
     },
     {
       key: '3',
       name: 'Joe Black',
-      uploadDate:'2001-12-11',
+      uploadDate:'2021-11-21',
       age: 32,
-      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
+      address: 'Sutton模型',
       tags: ['cool', 'teacher'],
+      desc:'适用于5排放的扩散连续扩散模拟'
     },
   ];

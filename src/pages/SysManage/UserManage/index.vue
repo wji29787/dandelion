@@ -1,10 +1,14 @@
 <template>
   <div>
-    <a-table :columns="columns" :data-source="data">
-    <template #bodyCell="{ column, text, row }">
-      <template v-if="column.dataIndex === 'name'">
-        <a>{{ text }}</a>
+    <a-table :columns="columns" :data-source="data" bordered>
+    <template #bodyCell="{ column, record,index }">
+       <template v-if="column.dataIndex === 'index'">
+        <i>{{ index+1 }}</i>
       </template>
+       <template v-if="column.dataIndex === 'isOpen'">
+         <a-switch v-model:checked="record.isOpen" ></a-switch>
+      </template>
+     
       <template v-if="column.title === '操作'">
           <a-button size="small" type="link" @click="setRole(row)">分配角色</a-button>
           <a-button size="small" type="link" @click="editRole(row)">编辑</a-button>

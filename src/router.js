@@ -10,7 +10,7 @@ import RouterComponent from  '@/components/RouterComponent.vue'
 const routes = [
   {
     path: "/",
-    component: () => import("./pages/Login.vue"),
+    component: () => import("./pages/Login/index.vue"),
     name: "Login",
     meta: {
       title: "登录",

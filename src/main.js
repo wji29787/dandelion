@@ -9,7 +9,7 @@ import Router from "./router";
 import store from "./store";
 import "ant-design-vue/dist/antd.css";
 
-// import "normalize.css/normalize.css";
+import "normalize.css/normalize.css";
 
 // import Element from 'element-plus';
 // import 'element-plus/dist/index.css';
