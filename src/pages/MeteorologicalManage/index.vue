@@ -1,7 +1,9 @@
 <template>
   <div>
 
-     <a-form  layout="inline">
+   <div class="form-box">
+
+       <a-form  layout="inline">
         <a-form-item label="监测站点" v-bind="validateInfos.site">
            <a-select
               ref="select"
@@ -10,10 +12,6 @@
              
             >
             <a-select-option v-for="(item) in siteList" :key="item.value" :value="item.value">{{item.label}}</a-select-option> 
-              <!-- <a-select-option value="jack">Jack</a-select-option>
-              <a-select-option value="lucy">Lucy</a-select-option>
-              <a-select-option value="disabled" disabled>Disabled</a-select-option>
-              <a-select-option value="Yiminghe">yiminghe</a-select-option> -->
             </a-select>
         </a-form-item>
         <a-form-item label="监测日期" v-bind="validateInfos.range" >
@@ -26,10 +24,11 @@
         </a-form-item>
         <a-form-item >
           <a-button type="primary" @click.prevent="onSubmit">搜索</a-button>
-          <!-- <a-button style="margin-left: 10px" @click="reset">Reset</a-button> -->
         </a-form-item>
       </a-form>
-   <a-table :columns="columns" :data-source="data" :scroll="{ x: 1500}">
+   </div>
+      
+   <a-table :columns="columns" :data-source="tableData" :scroll="{ x: 1500}">
     <template #bodyCell="{ column,index  }">
       <template v-if="column.type === 'index'">
         <span>{{ index+1 }}</span>
@@ -50,7 +49,7 @@ import { data ,columns,siteList ,fileList} from './conf'
 
 const useForm = Form.useForm;
 
-
+const tempdata = JSON.stringify(data)
 const  labelCol={
         span: 4,
       }
@@ -62,6 +61,7 @@ const modelRef = reactive({
       range:[],
     });
 
+const tableData = ref(JSON.parse(tempdata));
 
   const {
       resetFields,
@@ -85,8 +85,20 @@ const disabledDate = (current)=>{
  const onSubmit = () => {
       validate().then(res => {
         const range = toRaw(modelRef).range
-        // console.log(res, toRaw(modelRef));
-        // if()
+        // console.log(range)
+        if(!range||range.length===0){
+           tableData.value = JSON.parse(tempdata);
+          return;
+        }
+        const [start,end] = range;
+       
+       tableData.value = JSON.parse(tempdata).filter(t=>{
+         if(dayjs(t.addDate)>=dayjs(start)&&dayjs(t.addDate)<dayjs(end)){
+           return true
+         }
+         return false
+       })
+      
       }).catch(err => {
         console.log('error', err);
       });
@@ -174,5 +186,8 @@ watch(searchValue, value => {
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+}
+.form-box{
+  height: 80px;
 }
 </style>
