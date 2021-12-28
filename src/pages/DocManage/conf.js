@@ -58,13 +58,13 @@ export const columns = [
   export const data = [
     {
       key: '1',
-      name: '测试账号',
+      name: '烟团扩散模型',
       age: 32,
       address: 'New York',
       tags: ['nice', 'developer'],
       account:'test',
       email:'test@qq.com',
-      addDate:'2018-09-29 13:55:30',
+      addDate:'2021-12-28 11:25:06',
       lastLoginDate:'2018-12-29 13:55:30',
       isOpen:true,
       lastLoginIp:'127.0.0.1',
@@ -77,13 +77,13 @@ export const columns = [
     },
     {
       key: '2',
-      name: '系统管理员',
+      name: '蒸汽云爆炸',
       age: 42,
       address: 'London',
       tags: ['loser'],
       account:'admin',
       email:'admin@qq.com',
-      addDate:'2018-09-29 13:55:30',
+      addDate:'2021-12-27 16:09:14',
       lastLoginDate:'2018-12-29 13:55:30',
       isOpen:true,
       lastLoginIp:'127.0.0.1',
@@ -95,13 +95,13 @@ export const columns = [
     },
     {
       key: '3',
-      name: 'mcrcc',
+      name: '高斯模型说明',
       age: 32,
       address: 'Sidney',
       tags: ['cool', 'teacher'],
       account:'mcrcc',
       email:'mcrcc@qq.com',
-      addDate:'2018-09-29 13:55:30',
+      addDate:'2021-12-26 14:44:32',
       lastLoginDate:'2018-12-29 13:55:30',
       isOpen:false,
       lastLoginIp:'127.0.0.1',
@@ -112,4 +112,27 @@ export const columns = [
       desc:'',
     },
   ];
+
+  export const fileList = [{
+    title:'企业空间导航',
+    key:'0',
+    type:'dir',
+    children:[
+      {
+        title:'烟团扩散分析',
+        key:'0-0',
+        type:'file',
+      },
+      {
+        title:'蒸汽云爆炸',
+        key:'0-1',
+        type:'file',
+      },
+      {
+        title:'高斯模型说明',
+        key:'0-2',
+        type:'file',
+      },
+    ]
+  }]
 

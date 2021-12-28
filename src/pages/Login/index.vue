@@ -2,7 +2,7 @@
   <div class="login">
     <!-- <a-button type="primary" @click="login">登录</a-button> -->
     <h2 class="title">
-       HSH应急救援数据分析平台
+       核生化应急救援数据平台
     </h2>
           <a-form
             :model="formState"
@@ -102,7 +102,7 @@ const router = useRouter();
      min-width: 200px;
       position: absolute;
       top:32vh;
-      left: 65vw;
+      left: 64vw;
           // width: 400px;
           // height: 300px;
     }

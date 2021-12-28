@@ -141,19 +141,20 @@ const routes = [
             },
 
           },
-          {
-            path: "test",
-            name: "test",
-            component: () => import("./pages/test/index.vue"),
-            meta: {
-              title: "日志管理",
-              icon: "",
-              hidden: false,
-            },
-
-          }
+       
         ]
       },
+      {
+        path: "MonitoringChart",
+        name: "MonitoringChart",
+        component: () => import("./pages/MonitoringChart/index.vue"),
+        meta: {
+          title: "地图",
+          icon: "",
+          hidden: false,
+        },
+
+      }
     ],
   },
 ];

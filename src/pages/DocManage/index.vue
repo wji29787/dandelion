@@ -35,7 +35,7 @@
     <a-table :columns="columns" :data-source="data" :row-selection="rowSelection">
     <template #bodyCell="{ column, text }">
       <template v-if="column.dataIndex === 'name'">
-        <a>{{ text }}</a>
+        <span>{{ text }}</span>
       </template>
        <template v-if="column.title === '操作'">
           <a-space>
@@ -121,43 +121,43 @@
 import { ref ,watch ,reactive} from "vue";
 
 import { UploadOutlined,InboxOutlined ,EditFilled,DeleteOutlined ,DownloadOutlined } from '@ant-design/icons-vue';
-import { data ,columns } from './conf'
+import { data ,columns,fileList } from './conf'
 
-const x = 3;
-const y = 2;
-const z = 1;
-const genData = [];
+// const x = 3;
+// const y = 2;
+// const z = 1;
+// const genData = [];
 
-const generateData = (_level, _preKey, _tns) => {
-  const preKey = _preKey || '0';
-  const tns = _tns || genData;
-  const children = [];
+// const generateData = (_level, _preKey, _tns) => {
+//   const preKey = _preKey || '0';
+//   const tns = _tns || genData;
+//   const children = [];
 
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({
-      title: `文件${key}`,
-      key,
-      type:'dir'
-    });
+//   for (let i = 0; i < x; i++) {
+//     const key = `${preKey}-${i}`;
+//     tns.push({
+//       title: `文件${key}`,
+//       key,
+//       type:'dir'
+//     });
 
-    if (i < y) {
-      children.push(key);
-    }
-  }
+//     if (i < y) {
+//       children.push(key);
+//     }
+//   }
 
-  if (_level < 0) {
-    return tns;
-  }
+//   if (_level < 0) {
+//     return tns;
+//   }
 
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
-};
+//   const level = _level - 1;
+//   children.forEach((key, index) => {
+//     tns[index].children = [];
+//     return generateData(level, key, tns[index].children);
+//   });
+// };
 
-generateData(z);
+// generateData(z);
 const dataList = [];
 
 const generateList = data => {
@@ -175,7 +175,7 @@ const generateList = data => {
   }
 };
 
-generateList(genData);
+generateList(fileList);
 
 const getParentKey = (key, tree) => {
   let parentKey;
@@ -198,7 +198,7 @@ const getParentKey = (key, tree) => {
 const expandedKeys = ref([]);
 const searchValue = ref('');
 const autoExpandParent = ref(true);
-const gData = ref(genData);
+const gData = ref(fileList);
 
 const onExpand = keys => {
   expandedKeys.value = keys;

@@ -47,27 +47,30 @@
           </a-sub-menu>
           <a-menu-item key="DocManage">
             <template #icon>
-            <NodeIndexOutlined />
+               <FileTextOutlined />
             </template>
             <span>文档管理</span>
           </a-menu-item>
           <a-menu-item key="ModelManage">
             <template #icon>
-            <NodeIndexOutlined />
+               <DatabaseOutlined />
             </template>
             <span>模型管理</span>
           </a-menu-item>
           <a-sub-menu key="SysManage" @titleClick="titleClick">
             <template #icon>
-              <PartitionOutlined />
+              <AppstoreOutlined />
             </template>
             <template #title> 系统管理 </template>
             <a-menu-item key="UserManage">用户管理</a-menu-item>
             <a-menu-item key="LogManage">日志管理</a-menu-item>
-            <a-menu-item key="test">地图</a-menu-item>
-
-            <!-- <a-menu-item key="Map">地图管理</a-menu-item> -->
           </a-sub-menu>
+          <a-menu-item key="MonitoringChart">
+            <template #icon>
+                <GlobalOutlined />
+            </template>
+            <span>地图</span>
+          </a-menu-item>
         </a-menu>
       </a-layout-sider>
       <a-layout-content style="padding: 10px; overflow: auto">
@@ -92,6 +95,10 @@ import {
   SettingOutlined,
   NodeIndexOutlined,
   PartitionOutlined,
+  GlobalOutlined ,
+  DatabaseOutlined,
+  FileTextOutlined,
+  AppstoreOutlined
 } from "@ant-design/icons-vue";
 const router = useRouter();
 const route = useRoute();
