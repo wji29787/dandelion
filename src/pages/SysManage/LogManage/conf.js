@@ -25,8 +25,8 @@ export const columns = [
     },
     {
       title: '最后登录时间',
-      dataIndex: 'address',
-      key: 'address 3',
+      dataIndex: 'lastLoginDate',
+      key: 'lastLoginDate',
       ellipsis: true,
     },
   ];

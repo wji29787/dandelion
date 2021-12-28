@@ -1,4 +1,5 @@
 import { ref ,reactive,toRefs }  from 'vue'
+import {useStore }  from 'vuex'
 
 
 export const useModeldata = (inital)=>{
@@ -15,3 +16,5 @@ export const useModeldata = (inital)=>{
        visible , formData ,cancle
    } 
 }
+
+export const useGetLastTime = ()=>{}

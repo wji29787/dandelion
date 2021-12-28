@@ -5,6 +5,9 @@
       <template v-if="column.type === 'index'">
         <span>{{ index+1 }}</span>
       </template>
+      <template v-if="column.dataIndex === 'lastLoginDate'">
+        <span>{{lastTime||''}}</span>
+      </template>
      
     </template>
   </a-table>
@@ -12,10 +15,21 @@
 
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref ,computed} from "vue";
+import { useStore } from 'vuex'
+import dayjs from 'dayjs'
 import { data ,columns } from './conf'
 
 
+const store = useStore();
+
+const lastTime  = computed(()=>{
+  const d = store.state.commons.lastLoginTime;
+  if(d){
+    return dayjs(d).format('YYYY.MM.DD')
+  }
+  return null
+})
 
 
 const rowSelection = ref({

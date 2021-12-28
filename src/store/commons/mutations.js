@@ -1,3 +1,4 @@
+
 import {
   ADD_STACK_ITEM,
   DEL_STACK_ITEM
@@ -15,6 +16,14 @@ export default {
     let stack = { ...state.apiStack };
     delete stack[payload.url];
     state.apiStack = stack;
-  }
-  
+  },
+  save(state, payload = {}) {
+    if (!payload || typeof payload !== 'object') {
+      return;
+    }
+    Object.keys(payload).forEach(key => {
+      const value = payload[key];
+      state[key] = value;
+    });
+  },
 };

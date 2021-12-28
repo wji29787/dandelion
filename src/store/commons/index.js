@@ -12,7 +12,8 @@ const store = {
   state: {
     apiStack: {
       
-    }
+    },
+    lastLoginTime:null
   },
 
   mutations

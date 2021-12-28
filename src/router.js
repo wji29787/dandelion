@@ -149,7 +149,18 @@ const routes = [
         name: "MonitoringChart",
         component: () => import("./pages/MonitoringChart/index.vue"),
         meta: {
-          title: "地图",
+          title: "危害范围态势展示",
+          icon: "",
+          hidden: false,
+        },
+
+      },
+      {
+        path: "MeteorologicalManage",
+        name: "MeteorologicalManage",
+        component: () => import("./pages/MeteorologicalManage/index.vue"),
+        meta: {
+          title: "气象管理",
           icon: "",
           hidden: false,
         },

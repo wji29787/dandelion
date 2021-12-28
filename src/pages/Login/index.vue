@@ -52,8 +52,10 @@
 <script setup>
 import { useRouter } from "vue-router";
 import {  reactive } from 'vue';
+import {  useStore } from 'vuex';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 const router = useRouter();
+const store = useStore();
  const formState = reactive({
       username: '',
       password: '',
@@ -62,6 +64,9 @@ const router = useRouter();
 
   const login = () => {
     localStorage.token = "123456";
+     store.commit('commons/save',{
+       lastLoginTime:new Date()
+     }) 
     router.replace({
       name: "KnowledgeGraph",
     });

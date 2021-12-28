@@ -69,7 +69,13 @@
             <template #icon>
                 <GlobalOutlined />
             </template>
-            <span>地图</span>
+            <span>危害范围态势展示</span>
+          </a-menu-item>
+          <a-menu-item key="MeteorologicalManage">
+            <template #icon>
+                <FundOutlined />
+            </template>
+            <span>气象管理</span>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
@@ -98,7 +104,8 @@ import {
   GlobalOutlined ,
   DatabaseOutlined,
   FileTextOutlined,
-  AppstoreOutlined
+  AppstoreOutlined,
+  FundOutlined,
 } from "@ant-design/icons-vue";
 const router = useRouter();
 const route = useRoute();
