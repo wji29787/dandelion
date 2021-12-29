@@ -44,7 +44,7 @@
         </div>
       </a-form>
     </div>
-    <img id="image" style="display: none;" src="@/images/1640615815477.jpg" alt="Picture" />
+    <img id="image" style="display: none;" src="@/images/map.jpg" alt="Picture" />
     <div class="right">
       <!-- <div class="title">请输入坐标或者地图中点击</div> -->
       <a-form>

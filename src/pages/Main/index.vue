@@ -28,6 +28,12 @@
           v-model:selectedKeys="selectedKeys"
           @click="titleClick"
         >
+        <a-menu-item key="MonitoringChart">
+            <template #icon>
+                <GlobalOutlined />
+            </template>
+            <span>危害范围态势展示</span>
+          </a-menu-item>
           <a-menu-item key="KnowledgeGraph">
             <template #icon>
             <NodeIndexOutlined />
@@ -65,12 +71,7 @@
             <a-menu-item key="UserManage">用户管理</a-menu-item>
             <a-menu-item key="LogManage">日志管理</a-menu-item>
           </a-sub-menu>
-          <a-menu-item key="MonitoringChart">
-            <template #icon>
-                <GlobalOutlined />
-            </template>
-            <span>危害范围态势展示</span>
-          </a-menu-item>
+
           <a-menu-item key="MeteorologicalManage">
             <template #icon>
                 <FundOutlined />
