@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import RouterComponent from  '@/components/RouterComponent.vue'
+import Main from  '@/pages/Main/index.vue'
+import Login from  '@/pages/Login/index.vue'
 // 文档管理 DocManage
 // 数据管理 DataManage
 // 模型管理 ModelManage
@@ -8,9 +10,11 @@ import RouterComponent from  '@/components/RouterComponent.vue'
 // 日志管理 LogManage
 
 const routes = [
+  
   {
-    path: "/",
-    component: () => import("./pages/Login/index.vue"),
+    path: "/login",
+    name: "Login",
+    component: Login,
     name: "Login",
     meta: {
       title: "登录",
@@ -20,24 +24,26 @@ const routes = [
   },
   {
     path: "/main",
-    name: "main",
+    name: "Main",
     meta: {
       title: "",
       icon: "",
       hidden: false,
     },
-    component: () => import("./pages/Main/index.vue"),
-    beforeEnter: (to, from, next) => {
-      if (!window.localStorage.getItem("token")) {
-        next("/");
-      } else {
-        next();
-      }
-    },
+    component: Main,
+    // beforeEnter: (to, from, next) => {
+    //   if (!window.localStorage.getItem("token")) {
+
+    //     next("/login");
+    //   } else {
+    //     next();
+    //   }
+    // },
+    // redirect:'/main/MonitoringChart',
     children: [
       {
-        path: "/",
-        redirect: "/main/KnowledgeGraph",
+        path: "/main",
+        redirect: "/main/MonitoringChart",
       },
       {
         path: "KnowledgeGraph",
@@ -168,11 +174,30 @@ const routes = [
       }
     ],
   },
+  {
+    path: "/",
+    redirect: "/main",
+    // component: () => import("./pages/Login/index.vue"),
+    // name: "Login",
+    // meta: {
+    //   title: "登录",
+    //   icon: "",
+    //   hidden: true,
+    // },
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !window.localStorage.getItem("token")){
+    next({ name: 'Login' })
+  } 
+  else {
+    next()
+  }
+})
 
 export default router;

@@ -96,7 +96,7 @@
   </a-modal>
 </template>
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref ,} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import {
   SettingOutlined,
@@ -110,11 +110,12 @@ import {
 } from "@ant-design/icons-vue";
 const router = useRouter();
 const route = useRoute();
-const selectedKeys = ref(["KnowledgeGraph"]);
+
+const selectedKeys = ref([]);
 const visible = ref(false);
 const okModal = () => {
   localStorage.clear();
-  router.replace("/");
+  router.replace('/login');
   visible.value = false;
 };
 const titleClick = ({ item, key, keyPath }) => {
@@ -128,6 +129,13 @@ const titleClick = ({ item, key, keyPath }) => {
 const showModal = () => {
   visible.value = true;
 };
+
+ onMounted(()=>{
+  //  console.log('router',router)
+  //  const rrouer = router.resolve(route.path)
+  selectedKeys.value=[route.name]
+      // console.log('route',rrouer,route)
+ })
 </script>
 
 <style lang="less" scoped>

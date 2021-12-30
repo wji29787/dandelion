@@ -68,7 +68,7 @@ const store = useStore();
        lastLoginTime:new Date()
      }) 
     router.replace({
-      name: "KnowledgeGraph",
+      path: "/",
     });
   };
      const onFinish = values => {
