@@ -3,4 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
+hsh.tar.gz
 /设计报告.2021.11.01.v0.42.docx
