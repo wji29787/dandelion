@@ -64,10 +64,11 @@
       </a-form>
        <div class="left-footer">
           <div style="text-align: center;" >
-            <a-button  class="handle-btn" @click="createPic">确认生成</a-button >
+            <a-button  class="handle-btn" type="primary" @click="createPic">确认生成</a-button >
           </div>
           <div style="text-align: center;  margin-top: 10px;">
-            <a-button class="handle-btn" >案例库</a-button>
+          
+            <a-button class="handle-btn" @click="gobiochemical" type="primary" >案例库</a-button>
           </div>
           <div style="text-align: center; margin-top: 10px;">
             <a-button class="handle-btn" >知识库</a-button>
@@ -203,6 +204,9 @@ const timeSLiderChange = (val)=>{
    if(pot[val]){
       viewIns.view(pot[val])
    }
+} 
+const gobiochemical = ()=>{
+  window.open('http://idc.hengxing2016.cn/biochemical/plan')
 }
 onMounted(() => {
   // View an image.
