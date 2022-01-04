@@ -78,6 +78,12 @@
             </template>
             <span>气象管理</span>
           </a-menu-item>
+          <a-menu-item key="PlanManage">
+            <template #icon>
+                <AppstoreAddOutlined />
+            </template>
+            <span>预案管理</span>
+          </a-menu-item>
         </a-menu>
       </a-layout-sider>
       <a-layout-content style="padding: 10px; overflow: auto">
@@ -107,6 +113,7 @@ import {
   FileTextOutlined,
   AppstoreOutlined,
   FundOutlined,
+  AppstoreAddOutlined
 } from "@ant-design/icons-vue";
 const router = useRouter();
 const route = useRoute();
@@ -118,8 +125,19 @@ const okModal = () => {
   router.replace('/login');
   visible.value = false;
 };
+// 案例库
+const planPaths = {
+  PlanManage:'https://idc.hengxing2016.cn/biochemical/plan#/planList',
+  // 知识库
+  PlanInfo:'https://idc.hengxing2016.cn/biochemical/plan#/plan_info',
+  // PlanManage:'https://idc.hengxing2016.cn/biochemical/plan#/planList',
+}
 const titleClick = ({ item, key, keyPath }) => {
   if(key){
+    if(planPaths[key]){
+       window.open(planPaths[key])
+      return 
+    }
     router.push({
       name:key
     })

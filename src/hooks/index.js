@@ -1,19 +1,18 @@
 import { ref ,reactive,toRefs }  from 'vue'
-import {useStore }  from 'vuex'
+import { useStore }  from 'vuex'
 
 
-export const useModeldata = (inital)=>{
+export const useModeldata = (inital={})=>{
     const modelData = reactive({
         visible:false,
         formData:inital
     })
    const { visible ,formData } = toRefs(modelData)
-   const cancle = ()=>{
-        visible.value = false;
-        formData.value = inital
+   const cancel = ()=>{
+        formData.value = inital;
    }
    return {
-       visible , formData ,cancle
+       visible , formData ,cancel
    } 
 }
 

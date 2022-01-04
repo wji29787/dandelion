@@ -68,10 +68,10 @@
           </div>
           <div style="text-align: center;  margin-top: 10px;">
           
-            <a-button class="handle-btn" @click="gobiochemical" type="primary" >案例库</a-button>
+            <a-button class="handle-btn" @click="gobiochemical('PlanManage')"  >案例库</a-button>
           </div>
           <div style="text-align: center; margin-top: 10px;">
-            <a-button class="handle-btn" >知识库</a-button>
+            <a-button class="handle-btn" @click="gobiochemical('PlanInfo')">知识库</a-button>
           </div>
         </div>
     </div>
@@ -104,8 +104,8 @@
     <div class="right">
       <!-- <div class="title">请输入坐标或者地图中点击</div> -->
       <a-form>
-        <a-form-item label="侦查方案">
-          <a-button >详情>></a-button>
+        <a-form-item label="侦察方案">
+          <a-button @click=" modelData2.visible.value = true">详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
      
@@ -120,7 +120,7 @@
         <!-- <a-form-item label="地点">
         </a-form-item> -->
         <a-form-item label="人员方案">
-         <a-button >详情>></a-button>
+         <a-button @click=" modelData1.visible.value = true" >详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
 
@@ -129,7 +129,7 @@
         </a-form-item> -->
          <a-form-item label="消洗方案">
 
-         <a-button >详情>></a-button>
+         <a-button @click=" modelData3.visible.value = true">详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
 
@@ -140,6 +140,10 @@
         </a-form-item> -->
       </a-form>
     </div>
+
+    <ModelPersonnelProtection  :visible="modelData1.visible"  @cancel="modelData1.cancel"  />
+    <ModelReconnaissance  :visible="modelData2.visible"  @cancel="modelData2.cancel"  />
+    <ModelEliminate  :visible="modelData3.visible"  @cancel="modelData3.cancel"  />
   </div>
 </template>
 
@@ -147,6 +151,12 @@
 // You should import the CSS file.
 
 import { onMounted ,reactive,ref,onUnmounted,watch} from 'vue';
+import { useModeldata }  from '@/hooks'
+import ModelPersonnelProtection  from './components/ModelPersonnelProtection.vue'
+import ModelReconnaissance  from './components/ModelReconnaissance.vue'
+import ModelEliminate  from './components/ModelEliminate.vue'
+
+import { planPaths } from './conf'
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
 import  bzy from './img/bzy.jpg';
@@ -159,6 +169,10 @@ import  gsyt60 from './img/gsyt60.jpg';
 
 
 
+// model
+const modelData1 = useModeldata();
+const modelData2 = useModeldata();
+const modelData3 = useModeldata();
 
 const pics = {
   normal:normal,
@@ -183,6 +197,7 @@ const masks = ref({
  
 })
 const createPic = ()=>{
+      
        setPic()
 }
 const setPic = ()=>{
@@ -221,8 +236,8 @@ const timeSLiderChange = (val)=>{
       viewIns.view(pot[val])
    }
 } 
-const gobiochemical = ()=>{
-  window.open('http://idc.hengxing2016.cn/biochemical/plan')
+const gobiochemical = (key)=>{
+  window.open(planPaths[key])
 }
 onMounted(() => {
   // View an image.
