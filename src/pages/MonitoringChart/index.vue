@@ -77,10 +77,10 @@
     </div>
     <div>
       <ul id="images" style="display: none;">
-        <li><img :src="pics.normal" alt="Picture 1"></li>
-        <li><img :src="pics.bzy" alt="Picture 2"></li>
-        <li><img :src="pics.gsyt" alt="Picture 3"></li>
-        <li><img :src="pics.gsytlater" alt="Picture 3"></li>
+        <li v-for="(pic,index) in picList" :key="index" ><img :src="pic" alt="Picture 1"></li>
+        <!-- <li><img :src="pics.bzy" alt="Picture 2"></li> -->
+        <!-- <li><img :src="pics.gsyt" alt="Picture 3"></li>
+        <li><img :src="pics.gsytlater" alt="Picture 3"></li> -->
      </ul>
     </div>
     <!--时间轴-->
@@ -91,7 +91,7 @@
               <span :style="{color:'#FFF'}">时间轴</span>
             </template>
             
-           <a-slider v-model:value="timeSLider" :min="0" :max="4"  :marks="masks" @change="timeSLiderChange">
+           <a-slider v-model:value="timeSLider" :min="0" :max="3"  :marks="masks" @change="timeSLiderChange">
               <template #mark="{label}">
               <span :style="{color:'#FFF'}">{{label}}</span>
             </template> 
@@ -146,22 +146,29 @@
 <script setup>
 // You should import the CSS file.
 
-import { onMounted ,reactive,ref,onUnmounted} from 'vue';
+import { onMounted ,reactive,ref,onUnmounted,watch} from 'vue';
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
 import  bzy from './img/bzy.jpg';
-import  gsytys from './img/gsytys.jpg';
-import  gsytlater from './img/gsytlater.jpg';
 import  normal from './img/normal.jpg';
+// import  gsytlater from './img/gsytlater.jpg';
+import  gsyt0 from './img/gsyt0.jpg';
+import  gsyt20 from './img/gsyt20.jpg';
+import  gsyt40 from './img/gsyt40.jpg';
+import  gsyt60 from './img/gsyt60.jpg';
+
 
 
 
 const pics = {
-  gsyt:gsytys,
-  gsytlater:gsytlater,
-  bzy:bzy,
   normal:normal,
+  bzy:bzy,
+  gsyt0:gsyt0,
+  gsyt20:gsyt20,
+  gsyt40:gsyt40,
+  gsyt60:gsyt60,
 }
+const picList = Object.keys(pics).map(key=>pics[key])
 let viewIns = null
 const formData = reactive({
       model:''
@@ -169,37 +176,46 @@ const formData = reactive({
 const timeSLider = ref(0);
 const showSlider = ref(false)
 const masks = ref({
-  0:'0h',
-  1:'1',
-  2:'2',
-  3:'3',
-  4:'4h',
+  0:"0′",
+  1:'20′',
+  2:'40′',
+  3:'60′',
+ 
 })
 const createPic = ()=>{
-     console.log('formData.model',formData.model)
-    if(formData.model){
-      if(formData.model==='gsyt'){
-        //  viewIns.view(2)
-
-        timeSLider.value = 0;
-        showSlider.value = true
-        timeSLiderChange(0)
-        return;
-      }else {
-         viewIns.view(1)
-      }
-    }else {
-      viewIns.view(0)
-    }
-    showSlider.value = false
+       setPic()
 }
+const setPic = ()=>{
+
+  const models = {
+    normal:0,
+    gsyt:2,
+    bzy:1,
+  }
+  if(formData.model==='gsyt'){
+    timeSLider.value = 0;
+    showSlider.value = true
+  }else {
+    showSlider.value = false
+  }
+  if(formData.model){
+    
+     viewIns.view(models[formData.model])
+  }else {
+    viewIns.view(models[formData.normal])
+  }
+}
+watch(()=>formData.model,(model)=>{
+   
+   setPic()
+})
 const timeSLiderChange = (val)=>{
    const pot = {
      0:2,
-     1:2,
-     2:3,
-     3:3,
-     4:3
+     1:3,
+     2:4,
+     3:5,
+  
    }
    if(pot[val]){
       viewIns.view(pot[val])
@@ -214,6 +230,9 @@ onMounted(() => {
     inline: true,
     viewed() {
       viewIns.zoomTo(0.7);
+    },
+    ready(){
+      setPic()
     },
     backdrop: false,
     button: false,
