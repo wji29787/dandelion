@@ -155,8 +155,8 @@ import { useModeldata }  from '@/hooks'
 import ModelPersonnelProtection  from './components/ModelPersonnelProtection.vue'
 import ModelReconnaissance  from './components/ModelReconnaissance.vue'
 import ModelEliminate  from './components/ModelEliminate.vue'
+import { currentLinks } from '@/utils/config.js'
 
-import { planPaths } from './conf'
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
 import  bzy from './img/bzy.jpg';
@@ -237,7 +237,7 @@ const timeSLiderChange = (val)=>{
    }
 } 
 const gobiochemical = (key)=>{
-  window.open(planPaths[key])
+  window.open(currentLinks[key])
 }
 onMounted(() => {
   // View an image.

@@ -115,6 +115,8 @@ import {
   FundOutlined,
   AppstoreAddOutlined
 } from "@ant-design/icons-vue";
+import { currentLinks } from '@/utils/config.js'
+
 const router = useRouter();
 const route = useRoute();
 
@@ -125,17 +127,11 @@ const okModal = () => {
   router.replace('/login');
   visible.value = false;
 };
-// 案例库
-const planPaths = {
-  PlanManage:'https://idc.hengxing2016.cn/biochemical/plan#/planList',
-  // 知识库
-  PlanInfo:'https://idc.hengxing2016.cn/biochemical/plan#/plan_info',
-  // PlanManage:'https://idc.hengxing2016.cn/biochemical/plan#/planList',
-}
+
 const titleClick = ({ item, key, keyPath }) => {
   if(key){
-    if(planPaths[key]){
-       window.open(planPaths[key])
+    if(currentLinks[key]){
+       window.open(currentLinks[key])
       return 
     }
     router.push({

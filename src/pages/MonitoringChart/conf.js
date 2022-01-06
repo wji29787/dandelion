@@ -4,4 +4,4 @@ export const planPaths = {
     // 知识库
     PlanInfo:'https://idc.hengxing2016.cn/biochemical/plan#/plan_info',
     // PlanManage:'https://idc.hengxing2016.cn/biochemical/plan#/planList',
-  }
+}

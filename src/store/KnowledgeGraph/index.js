@@ -143,7 +143,7 @@ const store = {
       }
       
     },
-    async merge({ commit },paload){
+     async merge({ commit },paload){
 
       const { itemAttrs ,fileList,itemName,categoryId} = paload
       let attrs = [];
@@ -184,17 +184,8 @@ const store = {
         },
       };
       return  axios.post("/dandelion/api/v1/hazard-item/merge", formData)
-      // store.commit(`commons/${ADD_STACK_ITEM}`, formData,{ root:true });
-      // let res = await axios
-      //   .post("/dandelion/api/v1/hazard-item/merge", formData)
-      //   .catch((error) => {
-      //     // store.commit(`commons/${DEL_STACK_ITEM}`, formData,{ root:true });
-      //   });
-      // store.commit(`commons/${DEL_STACK_ITEM}`, formData);
-      // if (res && res.status == "200") {
-      //   graphRefresh(currAddNodeModel.itemName);
-      //   // hideAddModal();
-      // }
+    },
+    load(_,paload){
 
     }
   },
