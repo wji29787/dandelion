@@ -26,11 +26,7 @@ export const defaultattrsItem = (data={})=>{
 
 //设置节点样式
 const setNodeStyle = (element, nodeColor) => {
-  // if (element.mediaType && element.mediaType == "2") {
-  //   element.type = "image";
-  //   element.size = [100, 50];
-  //   element.img = element.attrValue;
-  // } else {
+  
   element.label = element.itemName || element.attrValue;
   if (element.nodeCategory == "node") {
     element.labelCfg = {
@@ -39,16 +35,13 @@ const setNodeStyle = (element, nodeColor) => {
       },
     };
   }
-  if (element.nodeColor) {
+  const color = element.nodeColor||nodeColor;
+  if(color){
     element.style = {
-      fill: element.nodeColor,
-    };
-  } else if (nodeColor) {
-    element.style = {
-      fill: nodeColor,
+      fill: color,
     };
   }
-  // }
+ 
 };
 
 // 创建节点数据源
@@ -59,13 +52,19 @@ export const createNodes = (nodesandedges,data) => {
     element.nodeCategory = "node";
     setNodeStyle(element);
     nodes.push(element);
+    const parent = {
+      id:element.id,
+      itemName:element.itemName,
+      categoryId:element.categoryId,
+    }
     //属性节点
     if (element.itemAttrs && element.itemAttrs.length) {
       let itemAttrs = element.itemAttrs;
       for (let j = 0; j < itemAttrs.length; j++) {
         const elementj = itemAttrs[j];
         if (elementj.mediaType && elementj.mediaType == "1") {
-          elementj.parent = JSON.stringify(element);
+          
+          elementj.parent = JSON.stringify(parent);
           elementj.nodeCategory = "node-attr";
           setNodeStyle(elementj);
           nodes.push(elementj);
@@ -80,7 +79,7 @@ export const createNodes = (nodesandedges,data) => {
         if (elementk.items && elementk.items.length) {
           for (let i = 0; i < elementk.items.length; i++) {
             const elementi = elementk.items[i];
-            elementi.parent = JSON.stringify(element);
+            elementi.parent = JSON.stringify(parent);
             elementi.nodeCategory = "node-relation";
             setNodeStyle(elementi, elementk.nodeColor);
             nodes.push(elementi);

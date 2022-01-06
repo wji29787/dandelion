@@ -105,7 +105,7 @@
       <!-- <div class="title">请输入坐标或者地图中点击</div> -->
       <a-form>
         <a-form-item label="侦察方案">
-          <a-button @click=" modelData2.visible.value = true">详情>></a-button>
+          <a-button @click="modelData2.open">详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
      
@@ -120,7 +120,7 @@
         <!-- <a-form-item label="地点">
         </a-form-item> -->
         <a-form-item label="人员方案">
-         <a-button @click=" modelData1.visible.value = true" >详情>></a-button>
+         <a-button @click="modelData1.open" >详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
 
@@ -129,7 +129,7 @@
         </a-form-item> -->
          <a-form-item label="消洗方案">
 
-         <a-button @click=" modelData3.visible.value = true">详情>></a-button>
+         <a-button @click="modelData3.open">详情>></a-button>
         </a-form-item>
         <!-- <a-form-item label="装备">
 
@@ -141,9 +141,9 @@
       </a-form>
     </div>
 
-    <ModelPersonnelProtection  :visible="modelData1.visible"  @cancel="modelData1.cancel"  />
-    <ModelReconnaissance  :visible="modelData2.visible"  @cancel="modelData2.cancel"  />
-    <ModelEliminate  :visible="modelData3.visible"  @cancel="modelData3.cancel"  />
+    <ModelPersonnelProtection  v-model="modelData1.visible.value"  @cancel="modelData1.cancel"  />
+    <ModelReconnaissance  v-model="modelData2.visible.value"  @cancel="modelData2.cancel"  />
+    <ModelEliminate  v-model="modelData3.visible.value"  @cancel="modelData3.cancel"  />
   </div>
 </template>
 

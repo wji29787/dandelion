@@ -1,12 +1,13 @@
 <template>
    <a-modal
-      v-model:visible="visible.value"
+      v-model:visible="modelValue"
       :maskClosable="false"
       :mask="true"
       width="620px"
       title=""
       :footer="null"
       @cancel="cancel"
+      @update:visible="update"
      :bodyStyle="{
          
           paddingTop:'40px'
@@ -62,11 +63,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue'
-
 // 防护方案
-const vm = getCurrentInstance()
-
 const columns = [
     {
       title: '防护装备',
@@ -119,10 +116,13 @@ const columns = [
       param:'不小于100分钟',
     },
   ];
-const { visible } = defineProps({
-  visible:Boolean
+defineProps({
+  modelValue:Boolean
 })
-const emit = defineEmits(['cancel'])
+const emit = defineEmits(['cancel','update:modelValue'])
+const update = (v)=>{
+  emit('update:modelValue',v)
+}
 const cancel = ()=>{
     emit('cancel')
 }

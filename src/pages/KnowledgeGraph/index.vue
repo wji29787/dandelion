@@ -3,33 +3,34 @@
     <a-row :gutter="16">
       <a-col span="4">
         <a-auto-complete
-          v-model:value="keyWord"
+          v-model:value="keyWordData.keyWord"
           style="width: 100%"
-          :options="keyWordList.list"
+          :options="keyWordData.list"
           placeholder="请输入搜索关键字"
           @search="handleSearch"
           @select="handleSelect"
+          option-label-prop="text"
         >
         </a-auto-complete>
       </a-col>
       <a-col span="15">
         <div
           ref="g6Ref"
-          id="container"
-          style="height: calc(100vh - 100px); width: 100%; background: #fff"
+          class="container"
         ></div>
 
-        <div class="zoomLevelbox">
-          <div class="zoomLeveltit">扩展级别:</div>
-          <a-slider
-            style="width: 150px"
-            v-model:value="zoomLevel"
-            :step="1"
-            :max="5"
-            :min="0"
-            @change="zoomLevelChange"
-          />
-        </div>
+        <!-- <div class="zoomLevelbox">
+          <a-form>
+              <a-form-item  :colon="false">
+                <template #label>
+                  <span>扩展级别</span>
+                </template>
+                
+                <a-slider v-model:value="zoomLevel" :min="0" :max="5"  @change="zoomLevelChange">
+                </a-slider >
+              </a-form-item>
+          </a-form>
+        </div> -->
         <div class="bottomDisplayBox">
           <a-space>
             <a-button
@@ -94,182 +95,7 @@
       </a-col>
     </a-row>
     <!-- 节点添加弹出框 -->
-    <a-modal
-      v-model:visible="showAddNodeModal"
-      :maskClosable="false"
-      :mask="true"
-      :footer="null"
-      title="添加节点"
-    >
-      <a-form
-        :model="currAddNodeModel"
-        ref="addNodeFormRef"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="formRefUpdate"
-      >
-        <a-form-item label="保存词库">
-          <a-switch
-            v-model:checked="currAddNodeModel.isSaveLibrary"
-            checked-children="是"
-            un-checked-children="否"
-          />
-        </a-form-item>
-        <a-row justify="space-between" :gutter="3">
-          <a-col :span="16">
-            <a-form-item label="节点名称">
-              <a-input
-                placeholder="请输入节点名称"
-                v-model:value="currAddNodeModel.itemName"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="8">
-            <a-form-item>
-              <a-select
-                ref="select1"
-                v-model:value="currAddNodeModel.categoryId"
-                style="width: 120px"
-                @change="categoryChange"
-                allowClear
-              >
-                <a-select-opt-group
-                  v-for="item in categoryList1"
-                  :key="item.title"
-                  :label="item.title"
-                >
-                  <a-select-option
-                    v-for="(ite, cidx) in item.items"
-                    :key="cidx + item.title"
-                    :value="ite.id"
-                    >{{ ite.category }}</a-select-option
-                  >
-                </a-select-opt-group>
-
-                <!-- <a-select-option value="jack">Jack</a-select-option>
-            <a-select-option value="lucy">Lucy</a-select-option>
-            <a-select-option value="disabled" disabled
-              >Disabled</a-select-option
-            >
-            <a-select-option value="Yiminghe">yiminghe</a-select-option> -->
-              </a-select>
-            </a-form-item>
-          </a-col>
-        </a-row>
-
-        <!-- <a-form-item label="节点类型">
-          <a-select
-            placeholder="请选择节点类型"
-            :options="nodeTypeOptions"
-            v-model:value="currAddNodeModel.itemCategory"
-          />
-        </a-form-item> -->
-
-        <template
-          v-for="(item, index) in currAddNodeModel.itemAttrs"
-          :key="item.id"
-        >
-          <a-form-item
-            :label="''"
-            :name="['itemAttrs', index, 'attrName']"
-            :rules="{
-              required: true,
-              message: '属性名称和属性值必填',
-              trigger: 'change',
-            }"
-          >
-            <a-row :gutter="10">
-              <a-col :span="6">
-                <a-input
-                  placeholder="属性名"
-                  v-model:value="item.attrName"
-                  style="text-align: right"
-                />
-              </a-col>
-              <a-col :span="12">
-                <a-input placeholder="属性值" v-model:value="item.attrValue" />
-              </a-col>
-              <a-col :span="6">
-                <MinusCircleOutlined
-                  style="
-                    font-size: 24px;
-                    color: #999;
-                    cursor: pointer;
-                    position: relative;
-                    top: 4px;
-                  "
-                  @click="removeNodeOneAttr(index)"
-                />
-                <PlusCircleOutlined
-                  style="
-                    font-size: 24px;
-                    color: #999;
-                    cursor: pointer;
-                    position: relative;
-                    margin-left: 6px;
-                    top: 4px;
-                  "
-                  @click="addNodeOneAttr(index)"
-                />
-              </a-col>
-            </a-row>
-          </a-form-item>
-        </template>
-
-        <a-form-item
-          :label="''"
-          style="display: flex; justify-content: center"
-          v-if="currAddNodeModel.itemAttrs.length == 0"
-        >
-          <a-button type="primary" style="margin: 0 auto" @click="addNodeAttr">
-            <PlusOutlined />
-            添加属性
-          </a-button>
-        </a-form-item>
-
-        <a-form-item label="照片">
-          <a-upload
-            :before-upload="nodeUpdateBeforeUpload"
-            list-type="picture-card"
-            v-model:file-list="currAddNodeModel.fileList"
-            id="nodeUpdateUpload"
-            style="width: 300px"
-            @change="nodeAddUploadChange"
-            @preview="handlePreview"
-          >
-            <p v-if="currAddNodeModel.fileList.length <= 3">点击上传</p>
-          </a-upload>
-        </a-form-item>
-
-        <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-          <a-row
-            type="flex"
-            justify="space-around"
-            align="middle"
-            style="width: 100%"
-          >
-            <a-col :span="4">
-              <a-button
-                type="default"
-                round
-                style="width: 100px"
-                @click="hideAddModal"
-                >取消</a-button
-              >
-            </a-col>
-            <a-col :span="4">
-              <a-button
-                type="primary"
-                round
-                style="width: 100px"
-                @click="sureAddModal"
-                >确定</a-button
-              >
-            </a-col>
-          </a-row>
-        </a-form-item>
-      </a-form>
-    </a-modal>
+   
 
     <!-- 属性编辑弹出框 -->
     <a-modal
@@ -442,13 +268,6 @@
                 >{{ ite.category }}</a-select-option
               >
             </a-select-opt-group>
-
-            <!-- <a-select-option value="jack">Jack</a-select-option>
-            <a-select-option value="lucy">Lucy</a-select-option>
-            <a-select-option value="disabled" disabled
-              >Disabled</a-select-option
-            >
-            <a-select-option value="Yiminghe">yiminghe</a-select-option> -->
           </a-select>
         </a-form-item>
          <template
@@ -610,6 +429,8 @@
         :src="previewImage"
       />
     </a-modal>
+    <!-- 添加节点 -->
+    <ModelAddGategory v-model="modelData1.visible.value" :data="currAddNodeModel" @onOk="sureAddModal" />
   </div>
 </template>
 
@@ -624,6 +445,7 @@ import {
   getCurrentInstance,
   nextTick,
   computed,
+  toRaw
 } from "vue";
 import G6 from "@antv/g6/dist/g6.min";
 // import G6 from "G6";
@@ -645,8 +467,12 @@ import { getCurrentRations ,defaultattrsItem,createNodes,createEdges,getBase64} 
 import getLegend from './createGrade/plugins/legend'
 import getContextMenu from './createGrade/plugins/getContextMenu'
 import { defaultOpts } from './createGrade'
+import ModelAddGategory from './components/ModelAddGategory.vue'
+import { useModeldata }  from '@/hooks'
+
 const store = useStore();
 const vm = getCurrentInstance();
+const { axios } = vm.proxy
 const g6Ref = ref();
 let graph = null;
 const clearMap = () => {
@@ -657,20 +483,24 @@ const nodesandedges = {
   edges: [],
 };
 //搜索 关键字
-const keyWord = ref("");
-const keyWordList = reactive({
+const keyWordData = reactive({
+  keyWord:'',
   list: [],
 });
 
 const handleSearch = async (e) => {
-  // console.log(e);
+ 
+   if (!e) {
+    keyWordData.list = [];
+    return
+   }
   await reqData([e], "search");
-  if (!e) {
-    keyWordList.list = [];
-  }
+ 
 };
 const handleSelect = (value, option) => {
-  graphRefresh(value);
+  if(keyWordData.keyWord){
+   graphRefresh(keyWordData.keyWord)
+  }
 };
 //缩放级别
 const zoomLevel = ref(3);
@@ -713,7 +543,8 @@ const fileParse = reactive({
     }
   },
   fileParseClick: (e) => {
-    if (!showAddNodeModal.value) {
+    
+    if (!modelData1.visible.value) {
       return;
     }
     currAddNodeModel.itemName =
@@ -724,7 +555,7 @@ const fileParse = reactive({
     let keyArr = e.key.split("-");
     let index = keyArr[1];
     if (keyArr[0] == "addnode") {
-      showAddNodeModal.value = true;
+      modelData1.visible.value = true;
       currAddNodeModel.itemName = fileParse.list[index].word;
     } else if (keyArr[0] == "addlibrary") {
       message.warning("敬请期待");
@@ -734,7 +565,7 @@ const fileParse = reactive({
 });
 
 // ------------添加节点数据相关开始-----------
-const showAddNodeModal = ref(false);
+
 let currAddNodeModel = reactive({
   itemName: "",
   id: "",
@@ -743,107 +574,43 @@ let currAddNodeModel = reactive({
   isSaveLibrary: true,
   categoryId: "", // 模版id
 });
-const hideAddModal = () => {
-  showAddNodeModal.value = false;
-};
-const nodeAddUploadChange = (e) => {
-  console.log(e);
-};
-const addNodeFormRef = ref();
-const sureAddModal = () => {
-  console.log(currAddNodeModel);
-  if (!currAddNodeModel.itemName) {
-    message.error("节点名称不能为空");
-    return;
-  }
-  addNodeFormRef.value
-    .validate()
-    .then(async () => {
-      let itemAttrs = [];
-      for (let index = 0; index < currAddNodeModel.itemAttrs.length; index++) {
-        const element = currAddNodeModel.itemAttrs[index];
-        itemAttrs.push({
-          mediaType: 1,
-          attrName: element.attrName,
-          attrValue: element.attrValue,
-        });
-      }
-      let fileList = currAddNodeModel.fileList;
-      if (fileList.length) {
-        let attrValue = [];
-        for (let index = 0; index < fileList.length; index++) {
-          const element = fileList[index];
-          attrValue.push(await getBase64(element.originFileObj));
-        }
-        itemAttrs.push({
-          mediaType: 2,
-          attrName: "图片",
-          attrValue: attrValue.join("@"),
-        });
-      }
-      const item = {
-        itemName: currAddNodeModel.itemName,
-        categoryId: currAddNodeModel.categoryId || +new Date(),
-        nodeColor: "#00ff55",
-      };
-      if (itemAttrs.length > 0) {
-        item.itemAttrs = itemAttrs;
-      }
-      const formData = {
-        requestHeader: requestHeader,
-        sign: sign,
-        payload: {
-          item,
-        },
-      };
-      if (itemAttrs.length) {
-        formData.payload.item.itemAttrs = itemAttrs;
-      }
+const modelData1 = useModeldata()
 
-      store.commit(`commons/${ADD_STACK_ITEM}`, formData);
-      let res = await vm.proxy.axios
-        .post("/dandelion/api/v1/hazard-item/merge", formData)
-        .catch((error) => {
-          store.commit(`commons/${DEL_STACK_ITEM}`, formData);
+
+
+
+const sureAddModal = async (d) => {
+  console.log(d);
+    store.commit(`commons/${ADD_STACK_ITEM}`, d);
+    const res = await store.dispatch('KnowledgeGraph/merge',d).catch((error) => {
+          store.commit(`commons/${DEL_STACK_ITEM}`, d);
         });
-      store.commit(`commons/${DEL_STACK_ITEM}`, formData);
-      if (res && res.status == "200") {
-        graphRefresh(currAddNodeModel.itemName);
-        hideAddModal();
-      }
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+    store.commit(`commons/${DEL_STACK_ITEM}`, d);
+    if (res && res.status == "200") {
+        graphRefresh(d.itemName)
+        modelData1.visible.value = false
+    }
+ 
 };
 const graphRefresh = (itemName) => {
-  let getNodes = graph.getNodes();
-  let keyWords = [itemName];
+   let keyWords = [itemName];
+   let getNodes = graph.getNodes();
+ 
   if (getNodes.length) {
     for (let index = 0; index < getNodes.length; index++) {
       const element = getNodes[index];
-      keyWords.push(element.getModel().label);
+      const label = element.getModel().label
+      if(label){
+         keyWords.push(label);
+      }
+      
     }
   }
-  reqData(keyWords);
+  console.log(keyWords)
+  reqData([...new Set(keyWords)]);
 };
-const removeNodeOneAttr = (index) => {
-  currAddNodeModel.itemAttrs.splice(index, 1);
-};
-const addNodeOneAttr = (index) => {
-  currAddNodeModel.itemAttrs.splice(index + 1, 0, {
-    attrName: "",
-    attrValue: "",
-    mediaType: 1,
-  });
-};
-const addNodeAttr = () => {
-  currAddNodeModel.itemAttrs.push({
-    attrName: "",
-    attrValue: "",
-    mediaType: 1,
-  });
-};
+
+
 // 新增关系属性
 const addCategoryAttr=()=>{
     modelCategoryType.list.push(defaultattrsItem())
@@ -978,6 +745,8 @@ const sureUpdateModal = () => {
         showUpdateNodeModal.value = false;
         message.info("节点修改成功");
         graphRefresh(currCreateAttrsModel.itemName);
+        
+        
       }
     })
     .catch((error) => {
@@ -1667,31 +1436,29 @@ const reqData = async (keyWords, type) => {
       extendLevel: zoomLevel.value,
     },
   };
-  if (!type) {
-    store.commit(`commons/${ADD_STACK_ITEM}`, formData);
-  }
 
-  let res = await vm.proxy.axios
-    .post("/dandelion/api/v1/hazard-item/load", formData)
-    .catch((error) => {
-      store.commit(`commons/${DEL_STACK_ITEM}`, formData);
-    });
-  store.commit(`commons/${DEL_STACK_ITEM}`, formData);
+  let res = await axios.post("/dandelion/api/v1/hazard-item/load", formData);
   if (res && res.status == "200") {
     if (res.data.payload.items) {
+      const {items} = res.data.payload
       if (type == "search") {
-        let items = res.data.payload.items;
-        for (let index = 0; index < items.length; index++) {
-          const element = items[index];
-          element.value = element.itemName;
-          element.text = element.id;
+    
+        if(items.length>0){
+          keyWordData.list = items.map(t=>{
+            return {
+              value:t.itemName,
+              text:t.id
+            }
+          })
+          console.log('list',toRaw(keyWordData.list))
+        }else{
+           keyWordData.list=[]
         }
-        keyWordList.list = items;
-      } else {
-        
      
-        createNodes(nodesandedges,res.data.payload.items);
-        createEdges(nodesandedges,res.data.payload.items);
+      } else {
+
+        createNodes(nodesandedges,items);
+        createEdges(nodesandedges,items);
         graph.changeData(nodesandedges);
       }
     }
@@ -1729,13 +1496,7 @@ const reqNodeTypeList = async () => {
 
 
 
-const categoryChange = (val) => {
-  if (val) {
-    getAttrList(val,1);
-  } else {
-    currAddNodeModel.itemAttrs = [];
-  }
-};
+
 const categoryTypeChange = (val) => {
   if (val) {
     getAttrList(val,2);
@@ -1746,7 +1507,7 @@ const categoryTypeChange = (val) => {
 };
 //关系类型列表数据
 const categoryList2 = ref([]);
-const categoryList1 = ref([]);
+
 
 // 获取节点类型
 
@@ -1827,8 +1588,9 @@ const getAttrList = async (id,type) => {
     .post("/dandelion/api/v1/item_category/attribute/list", formData)
     .catch((error) => {});
   if (result && result.status == "200") {
+     const { payload } = result.data
     if(type ===1){
-        const { payload } = result.data
+        // const { payload } = result.data
             const itemAttrs = payload.attrs.map((t) => {
               return {
                 attrName: t.attrName,
@@ -1871,19 +1633,11 @@ const getAttrList = async (id,type) => {
 //   }
 // };
 onMounted(async () => {
-  // await reqData(["计价", "氨气"]);
+  
   nextTick(() => {
     initG6();
   });
-  loadCategoryList(1).then((res) => {
-    if (res) {
-     
-      categoryList1.value = res;
-      if (res.length > 0) {
-        // currAddNodeModel.categoryId = res[0].items[0].id;
-      }
-    }
-  });
+  
   loadCategoryList(2).then((res) => {
     if (res) {
       categoryList2.value = res;
@@ -1892,6 +1646,7 @@ onMounted(async () => {
       }
     }
   });
+  store.dispatch('KnowledgeGraph/getCategoryList1')
 });
 
 onUnmounted(() => {
@@ -1902,17 +1657,16 @@ onUnmounted(() => {
 
 <style lang="less" scoped>
 .knowledgegraphshow-container {
+  .container {
+    height: calc(100vh - 100px); 
+    width: 100%; 
+    background: #fff;
+  }
   .zoomLevelbox {
     position: absolute;
     width: 250px;
     top: 25px;
     left: 30px;
-    display: flex;
-    align-items: center;
-    .zoomLeveltit {
-      flex-shrink: 0;
-      margin-right: 5px;
-    }
   }
   .bottomDisplayBox {
     position: absolute;
