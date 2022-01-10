@@ -64,7 +64,7 @@ export const createNodes = (nodesandedges,data) => {
         const elementj = itemAttrs[j];
         if (elementj.mediaType && elementj.mediaType == "1") {
           
-          elementj.parent = JSON.stringify(parent);
+          elementj.parent = parent;
           elementj.nodeCategory = "node-attr";
           setNodeStyle(elementj);
           nodes.push(elementj);
@@ -79,7 +79,7 @@ export const createNodes = (nodesandedges,data) => {
         if (elementk.items && elementk.items.length) {
           for (let i = 0; i < elementk.items.length; i++) {
             const elementi = elementk.items[i];
-            elementi.parent = JSON.stringify(parent);
+            elementi.parent = parent;
             elementi.nodeCategory = "node-relation";
             setNodeStyle(elementi, elementk.nodeColor);
             nodes.push(elementi);

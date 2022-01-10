@@ -9,8 +9,10 @@
           placeholder="请输入搜索关键字"
           @search="handleSearch"
           @select="handleSelect"
-          option-label-prop="text"
         >
+         <template #option="item">
+             <span>{{item.text}} </span>
+           </template>
         </a-auto-complete>
       </a-col>
       <a-col span="15">
@@ -97,144 +99,8 @@
     <!-- 节点添加弹出框 -->
    
 
-    <!-- 属性编辑弹出框 -->
-    <a-modal
-      v-model:visible="showUpdateNodeModal"
-      :maskClosable="false"
-      :footer="null"
-      title="修改"
-    >
-      <a-form
-        :model="currCreateAttrsModel"
-        ref="UpdateNodeFormRef"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="formRefUpdate"
-      >
-       <a-row justify="space-between" :gutter="8" align="middle">
-         <a-col :span="18">
-            <a-form-item label="节点名称">
-              <a-input
-                placeholder="请输入节点名称"
-                v-model:value="currCreateAttrsModel.itemName"
-              />
-          </a-form-item>
-         </a-col>
-         <a-col :span="6">
-            <a-form-item label="">
-                <el-color-picker
-                v-model="currCreateAttrsModel.nodeColor"
-              ></el-color-picker>
-          </a-form-item>
-         </a-col>
-
-       </a-row>
-        <template
-          v-for="(item, index) in currCreateAttrsModel.itemAttrs"
-          :key="item.id"
-        >
-          <a-form-item
-            :label="''"
-            v-if="item.mediaType == '1'"
-            :name="['itemAttrs', index, 'attrName']"
-            :rules="{
-              required: true,
-              message: '属性名称和属性值必填',
-              trigger: 'change',
-            }"
-          >
-            <a-row :gutter="10">
-              <a-col :span="6">
-                <a-input
-                  placeholder="属性名"
-                  v-model:value="item.attrName"
-                  style="text-align: right"
-                />
-              </a-col>
-              <a-col :span="12">
-                <a-input placeholder="属性值" v-model:value="item.attrValue" />
-              </a-col>
-              <a-col :span="6">
-                <MinusCircleOutlined
-                  style="
-                    font-size: 24px;
-                    color: #999;
-                    cursor: pointer;
-                    position: relative;
-                    top: 4px;
-                  "
-                  @click="removeOneAttr(index)"
-                />
-                <PlusCircleOutlined
-                  style="
-                    font-size: 24px;
-                    color: #999;
-                    cursor: pointer;
-                    position: relative;
-                    margin-left: 6px;
-                    top: 4px;
-                  "
-                  @click="addOneAttr(index)"
-                />
-              </a-col>
-            </a-row>
-          </a-form-item>
-        </template>
-
-        <a-form-item
-          :label="''"
-          style="display: flex; justify-content: center"
-          v-if="isHaveitemAttrs == -1"
-        >
-          <a-button type="primary" style="margin: 0 auto" @click="addAttr">
-            <PlusOutlined />
-            添加属性
-          </a-button>
-        </a-form-item>
-
-        <a-form-item label="照片">
-          <a-upload
-            :before-upload="nodeUpdateBeforeUpload"
-            list-type="picture-card"
-            v-model:file-list="currCreateAttrsModel.fileList"
-            id="nodeUpdateUpload"
-            style="width: 300px"
-            @change="nodeUpdateUploadChange"
-            @preview="handlePreview"
-          >
-            <p v-if="currCreateAttrsModel.fileList.length <= 3">点击上传</p>
-          </a-upload>
-        </a-form-item>
-
-        <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-          <a-row
-            type="flex"
-            justify="space-around"
-            align="middle"
-            style="width: 100%"
-          >
-            <a-col :span="4">
-              <a-button
-                type="default"
-                round
-                style="width: 100px"
-                @click="hideUpdateModal"
-                >取消</a-button
-              >
-            </a-col>
-            <a-col :span="4">
-              <a-button
-                type="primary"
-                round
-                style="width: 100px"
-                @click="sureUpdateModal"
-                >确定</a-button
-              >
-            </a-col>
-          </a-row>
-        </a-form-item>
-      </a-form>
-    </a-modal>
+  
+    
 
     <!-- 添加关系弹出框 -->
     <a-modal
@@ -416,21 +282,11 @@
       </a-form>
     </a-modal>
 
-    <!-- 图片预览 -->
-    <a-modal
-      title="图片预览"
-      :visible="previewVisible"
-      :footer="null"
-      @cancel="handlePreviewCancel"
-    >
-      <img
-        alt="example"
-        style="max-width: 100%; display: block; margin: 0 auto"
-        :src="previewImage"
-      />
-    </a-modal>
+   
     <!-- 添加节点 -->
     <ModelAddGategory v-model="modelData1.visible.value" :data="currAddNodeModel" @onOk="sureAddModal" />
+     <!-- 属性编辑弹出框 -->
+    <ModelEditGategory v-model="modelData2.visible.value" :data="currCreateAttrsModel" @onOk="sureUpdateModal" />
   </div>
 </template>
 
@@ -468,6 +324,7 @@ import getLegend from './createGrade/plugins/legend'
 import getContextMenu from './createGrade/plugins/getContextMenu'
 import { defaultOpts } from './createGrade'
 import ModelAddGategory from './components/ModelAddGategory.vue'
+import ModelEditGategory from './components/ModelEditGategory.vue'
 import { useModeldata }  from '@/hooks'
 
 const store = useStore();
@@ -486,19 +343,22 @@ const nodesandedges = {
 const keyWordData = reactive({
   keyWord:'',
   list: [],
+
 });
 
 const handleSearch = async (e) => {
  
    if (!e) {
-    keyWordData.list = [];
+    // keyWordData.list = [];
     return
    }
   await reqData([e], "search");
  
 };
 const handleSelect = (value, option) => {
+  
   if(keyWordData.keyWord){
+   
    graphRefresh(keyWordData.keyWord)
   }
 };
@@ -566,32 +426,7 @@ const fileParse = reactive({
 
 // ------------添加节点数据相关开始-----------
 
-let currAddNodeModel = reactive({
-  itemName: "",
-  id: "",
-  itemAttrs: [],
-  fileList: [],
-  isSaveLibrary: true,
-  categoryId: "", // 模版id
-});
-const modelData1 = useModeldata()
 
-
-
-
-const sureAddModal = async (d) => {
-  console.log(d);
-    store.commit(`commons/${ADD_STACK_ITEM}`, d);
-    const res = await store.dispatch('KnowledgeGraph/merge',d).catch((error) => {
-          store.commit(`commons/${DEL_STACK_ITEM}`, d);
-        });
-    store.commit(`commons/${DEL_STACK_ITEM}`, d);
-    if (res && res.status == "200") {
-        graphRefresh(d.itemName)
-        modelData1.visible.value = false
-    }
- 
-};
 const graphRefresh = (itemName) => {
    let keyWords = [itemName];
    let getNodes = graph.getNodes();
@@ -609,6 +444,25 @@ const graphRefresh = (itemName) => {
   console.log(keyWords)
   reqData([...new Set(keyWords)]);
 };
+const currAddNodeModel = reactive({
+  itemName: "",
+  id: "",
+  itemAttrs: [],
+  fileList: [],
+  isSaveLibrary: true,
+  categoryId: "", // 模版id
+});
+const modelData1 = useModeldata()
+
+const sureAddModal = async (d) => {
+    const res = await store.dispatch('KnowledgeGraph/gategoryAdd',d)
+    if (res && res.status == "200") {
+        graphRefresh(d.itemName)
+        modelData1.visible.value = false
+    }
+ 
+};
+
 
 
 // 新增关系属性
@@ -617,20 +471,9 @@ const addCategoryAttr=()=>{
 }
 // ------------修改节点属性数据相关开始-----------
 //修改弹出框是否显示
-const showUpdateNodeModal = ref(false);
-const previewVisible = ref(false);
-const previewImage = ref("");
-const handlePreview = async (file) => {
-  if (!file.url) {
-    file.url = await getBase64(file.originFileObj);
-  }
-  previewImage.value = file.url;
-  previewVisible.value = true;
-};
-const handlePreviewCancel = () => {
-  previewVisible.value = false;
-};
-let currCreateAttrsModel = reactive({
+const modelData2 = useModeldata()
+
+const currCreateAttrsModel = reactive({
   itemName: "",
   id: "",
   categoryId: "",
@@ -638,145 +481,33 @@ let currCreateAttrsModel = reactive({
   fileList: [],
   nodeColor:"#00ff55"  // 颜色
 });
+
+
+const sureUpdateModal = async (d) => {
+    const res = await store.dispatch('KnowledgeGraph/gategoryEdit',{...d,handleType:'add'})
+    if (res && res.status == "200") {
+        graphRefresh(d.itemName)
+        modelData2.visible.value = false
+    }
+};
+// ------------修改节点属性数据相关结束-----------
 const nodeTypeOptions = reactive({
   list: [],
 });
-const nodeUpdateBeforeUpload = () => {
-  return false;
-};
+
 
 
 
 const labelCol = ref({ style: { width: "80px" } });
 const wrapperCol = ref({ span: 20 });
-//关闭弹出框
-const hideUpdateModal = () => {
-  showUpdateNodeModal.value = false;
-};
-const nodeUpdateUploadChange = (e) => {
-  console.log(e);
-};
-const UpdateNodeFormRef = ref();
-const sureUpdateModal = () => {
-  console.log(currCreateAttrsModel);
-  if (!currCreateAttrsModel.itemName) {
-    message.error("节点名称不能为空");
-    return;
-  }
-  UpdateNodeFormRef.value
-    .validate()
-    .then(async () => {
-      let itemAttrs = [];
-      let itemImg = null;
-      for (
-        let index = 0;
-        index < currCreateAttrsModel.itemAttrs.length;
-        index++
-      ) {
-        const element = currCreateAttrsModel.itemAttrs[index];
-        if (element.mediaType == 1) {
-          if (element.id) {
-            itemAttrs.push({
-              mediaType: 1,
-              attrName: element.attrName,
-              attrValue: element.attrValue,
-              id: element.id,
-            });
-          } else {
-            itemAttrs.push({
-              mediaType: 1,
-              attrName: element.attrName,
-              attrValue: element.attrValue,
-            });
-          }
-        } else {
-          itemImg = element;
-        }
-      }
-      let fileList = currCreateAttrsModel.fileList;
-      if (fileList.length) {
-        let attrValue = [];
-        for (let index = 0; index < fileList.length; index++) {
-          const element = fileList[index];
-          if (element.url) {
-            attrValue.push(element.url);
-          } else {
-            attrValue.push(await getBase64(element.originFileObj));
-          }
-        }
-        if (itemImg) {
-          itemAttrs.push({
-            id: itemImg.id,
-            mediaType: 2,
-            attrName: "图片",
-            attrValue: attrValue.join("@"),
-          });
-        } else {
-          itemAttrs.push({
-            mediaType: 2,
-            attrName: "图片",
-            attrValue: attrValue.join("@"),
-          });
-        }
-      }
 
-      let formData = {
-        requestHeader: requestHeader,
-        sign: sign,
-        payload: {
-          item: {
-            id: currCreateAttrsModel.id,
-            itemName: currCreateAttrsModel.itemName,
-            categoryId: currCreateAttrsModel.categoryId,
-            nodeColor: currCreateAttrsModel.nodeColor,
-            itemAttrs: itemAttrs,
-          },
-        },
-      };
-      console.log(formData, fileList);
-      store.commit(`commons/${ADD_STACK_ITEM}`, formData);
-      let res = await vm.proxy.axios
-        .post("/dandelion/api/v1/hazard-item/merge", formData)
-        .catch((error) => {
-          store.commit(`commons/${DEL_STACK_ITEM}`, formData);
-        });
-      store.commit(`commons/${DEL_STACK_ITEM}`, formData);
-      if (res && res.status == "200") {
-        showUpdateNodeModal.value = false;
-        message.info("节点修改成功");
-        graphRefresh(currCreateAttrsModel.itemName);
-        
-        
-      }
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
-};
-const removeOneAttr = (index) => {
-  currCreateAttrsModel.itemAttrs.splice(index, 1);
-  console.log(currCreateAttrsModel.itemAttrs);
-};
-const isHaveitemAttrs = computed(() => {
-  return currCreateAttrsModel.itemAttrs.findIndex((item) => {
-    return item.mediaType == "1";
-  });
-});
-const addOneAttr = (index) => {
-  currCreateAttrsModel.itemAttrs.splice(index + 1, 0, {
-    itemName: "",
-    attrValue: "",
-    mediaType: 1,
-  });
-};
-const addAttr = () => {
-  currCreateAttrsModel.itemAttrs.push({
-    itemName: "",
-    attrValue: "",
-    mediaType: 1,
-  });
-};
-// ------------修改节点属性数据相关结束-----------
+
+
+
+
+
+
+
 
 //-------------关系数据相关开始---------------
 //添加关系名称和值
@@ -1060,7 +791,7 @@ const registerMenuEvents = ()=>{
     return {
       updateNode:(target,item)=>{
         let getModel = JSON.parse(JSON.stringify(item.getModel()));
-        console.log(getModel)
+        // console.log(getModel)
           currCreateAttrsModel.itemName = getModel.label;
           currCreateAttrsModel.id = getModel.id;
           currCreateAttrsModel.categoryId = getModel.categoryId;
@@ -1082,7 +813,8 @@ const registerMenuEvents = ()=>{
               });
             }
           }
-          showUpdateNodeModal.value = true;
+         
+          modelData2.visible.value = true
 
       },
       delNode:(target,item)=>{
@@ -1168,7 +900,7 @@ const registerMenuEvents = ()=>{
               let edge = item.getEdges().find((edge) => {
                 return (
                   edge.getModel().source ==
-                  JSON.parse(item.getModel().parent).id
+                  item.getModel().parent.id
                 );
               });
               updateAttrsName.value = edge.getModel().label;
@@ -1260,7 +992,7 @@ const delAttr = async (item) => {
     requestHeader: requestHeader,
     sign: sign,
     payload: {
-      itemId: JSON.parse(item.getModel().parent).id,
+      itemId: item.getModel().parent.id,
       attrIds: [item.getModel().id],
     },
   };
@@ -1386,9 +1118,9 @@ const updateAttrs = async (item) => {
     sign: sign,
     payload: {
       item: {
-        id: JSON.parse(item.getModel().parent).id,
-        itemName: JSON.parse(item.getModel().parent).itemName,
-        categoryId: JSON.parse(item.getModel().parent).categoryId,
+        id: item.getModel().parent.id,
+        itemName: item.getModel().parent.itemName,
+        categoryId: item.getModel().parent.categoryId,
         itemAttrs: [
           {
             id: item.getModel().id,
@@ -1411,7 +1143,7 @@ const updateAttrs = async (item) => {
   if (res && res.status == "200") {
     message.info("节点属性修改成功");
     let edge = item.getEdges().find((edge) => {
-      return edge.getModel().source == JSON.parse(item.getModel().parent).id;
+      return edge.getModel().source == item.getModel().parent.id;
     });
     graph.updateItem(edge.getModel().id, {
       //更新边的名称
@@ -1447,12 +1179,11 @@ const reqData = async (keyWords, type) => {
           keyWordData.list = items.map(t=>{
             return {
               value:t.itemName,
-              text:t.id
+              text:t.itemName,
+              key:t.id
             }
           })
-          console.log('list',toRaw(keyWordData.list))
-        }else{
-           keyWordData.list=[]
+          // console.log('list',toRaw(keyWordData.list))
         }
      
       } else {
@@ -1638,15 +1369,9 @@ onMounted(async () => {
     initG6();
   });
   
-  loadCategoryList(2).then((res) => {
-    if (res) {
-      categoryList2.value = res;
-      if (res.length > 0) {
-        // modelCategoryType.select = res[0].items[0].id;
-      }
-    }
-  });
-  store.dispatch('KnowledgeGraph/getCategoryList1')
+  
+  store.dispatch('KnowledgeGraph/getCategoryList1');
+  store.dispatch('KnowledgeGraph/getCategoryList2');
 });
 
 onUnmounted(() => {

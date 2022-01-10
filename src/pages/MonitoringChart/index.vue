@@ -75,15 +75,16 @@
           </div>
         </div>
     </div>
-    <div>
-      <ul id="images" style="display: none;">
-        <li v-for="(pic,index) in picList" :key="index" ><img :src="pic" alt="Picture 1"></li>
+    <!-- <div> -->
+      <!-- <ul id="images" style="display: none;"> -->
+        <!-- <li v-for="(pic,index) in picList" :key="index" ><img :src="pic" alt="Picture 1"></li> -->
         <!-- <li><img :src="pics.bzy" alt="Picture 2"></li> -->
         <!-- <li><img :src="pics.gsyt" alt="Picture 3"></li>
         <li><img :src="pics.gsytlater" alt="Picture 3"></li> -->
-     </ul>
-    </div>
+     <!-- </ul> -->
+    <!-- </div> -->
     <!--时间轴-->
+    <div id="cesiumContainer" class="cesiumContainer"></div>
      <div class="time-box" v-if="showSlider">
        <a-form>
           <a-form-item  :colon="false">
@@ -157,8 +158,13 @@ import ModelReconnaissance  from './components/ModelReconnaissance.vue'
 import ModelEliminate  from './components/ModelEliminate.vue'
 import { currentLinks } from '@/utils/config.js'
 
+
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
+
+// import { Cesium } from './Cesium'
+import {  planPaths ,EV_DemoData} from './conf'
+
 import  bzy from './img/bzy.jpg';
 import  normal from './img/normal.jpg';
 // import  gsytlater from './img/gsytlater.jpg';
@@ -166,6 +172,17 @@ import  gsyt0 from './img/gsyt0.jpg';
 import  gsyt20 from './img/gsyt20.jpg';
 import  gsyt40 from './img/gsyt40.jpg';
 import  gsyt60 from './img/gsyt60.jpg';
+
+// import positiveX from './img/starmap_2020_16k/starmap_2020_16k_px';
+// import negativeX from './img/starmap_2020_16k/starmap_2020_16k_mx';
+// import positiveY from './img/starmap_2020_16k/starmap_2020_16k_py';
+// import negativeY from './img/starmap_2020_16k/starmap_2020_16k_my';
+// import positiveZ from './img/starmap_2020_16k/starmap_2020_16k_pz';
+// import negativeZ from './img/starmap_2020_16k/starmap_2020_16k_mz';
+
+
+
+
 
 
 
@@ -213,12 +230,12 @@ const setPic = ()=>{
   }else {
     showSlider.value = false
   }
-  if(formData.model){
+  // if(formData.model){
     
-     viewIns.view(models[formData.model])
-  }else {
-    viewIns.view(models[formData.normal])
-  }
+  //    viewIns.view(models[formData.model])
+  // }else {
+  //   viewIns.view(models[formData.normal])
+  // }
 }
 watch(()=>formData.model,(model)=>{
    
@@ -233,43 +250,105 @@ const timeSLiderChange = (val)=>{
   
    }
    if(pot[val]){
-      viewIns.view(pot[val])
+      // viewIns.view(pot[val])
    }
 } 
 const gobiochemical = (key)=>{
   window.open(currentLinks[key])
 }
+
+
+// 地图
+let viewer =null;
+
+ function startup() {
+        const Cesium = window.Cesium
+        // main.js中配置的demo数据
+        let data = EV_DemoData.Primer.Image["01_GIS-Server"];       
+        let cameraControllerType = EV_DemoData.cameraControllerType;    //相机操作方式设置
+
+         viewer = new Cesium.Viewer('cesiumContainer',{
+            animation: false,
+            baseLayerPicker: false,
+            fullscreenButton: false,
+            geocoder: false,
+            homeButton: false,
+            infoBox: false,
+            sceneModePicker: false,
+            selectionIndicator: false,
+            timeline: false,
+            navigationHelpButton: false,
+            skyBox : new Cesium.SkyBox({        //自定义天空盒,星空效果更好，但对低配置电脑有一些性能影响
+                sources: {
+                  positiveX: "/starmap_2020_16k/starmap_2020_16k_px.jpg",
+                  negativeX: "/starmap_2020_16k/starmap_2020_16k_mx.jpg",
+                  positiveY: "/starmap_2020_16k/starmap_2020_16k_py.jpg",
+                  negativeY: "/starmap_2020_16k/starmap_2020_16k_my.jpg",
+                  positiveZ: "/starmap_2020_16k/starmap_2020_16k_pz.jpg",
+                  negativeZ: "/starmap_2020_16k/starmap_2020_16k_mz.jpg",
+                },
+            })
+        });
+
+        const scene = viewer.scene;
+        scene.debugShowFramesPerSecond = true;                      //显示帧率
+        // viewer.extend(Cesium.viewerCesiumInspectorMixin);      
+
+        // 创建图层管理器
+        let evLayerManager = new Cesium.EV_LayerManager(scene);
+        // 加载影像
+        let imageLayer = evLayerManager.add({
+          name: data.name,                          //图层名称
+          url: data.url,                            //GIS-Server地址
+          type: Cesium.EV_LayerType.IMAGE,          //图层类型
+          queryParam: data.queryParam,              //请求参数
+        });
+        
+        // 设置相机操作方式
+        if (cameraControllerType) {
+            let evCameraController = new Cesium.EV_CameraControllerType(viewer);
+            evCameraController[cameraControllerType]();
+        }
+    }
+
 onMounted(() => {
   // View an image.
-   viewIns = new Viewer(document.getElementById('images'), {
-    inline: true,
-    viewed() {
-      viewIns.zoomTo(0.7);
-    },
-    ready(){
-      setPic()
-    },
-    backdrop: false,
-    button: false,
-    toolbar: false,
-    minHeight: 700,
-    fullscreen: false,
-    navbar:false
-    // movable: false
-  });
-
+  //  viewIns = new Viewer(document.getElementById('images'), {
+  //   inline: true,
+  //   viewed() {
+  //     viewIns.zoomTo(0.7);
+  //   },
+  //   ready(){
+  //     setPic()
+  //   },
+  //   backdrop: false,
+  //   button: false,
+  //   toolbar: false,
+  //   minHeight: 700,
+  //   fullscreen: false,
+  //   navbar:false
+  //   // movable: false
+  // });
+    console.log(EV_DemoData)
+    // console.log(Cesium)
+    startup()
 });
 onUnmounted(()=>{
   if(viewIns){
    viewIns.destroy();
     viewIns = null
   }
+  if(viewer){
+
+  }
  
 })
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .test {
+  width:100%;
+  height: 100%;
   position: relative;
   .formmap{
     height: 100%;
@@ -315,7 +394,34 @@ onUnmounted(()=>{
     }
   .right {
     right: 0;
+    top:0
   }
-
+  #cesiumContainer{
+     width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+  }
 }
+</style>
+<style >
+.sectionChars {
+    top: auto;
+    width: 90%;
+    height: 200px;
+    bottom: 10px;
+    left: 5%;
+    top: auto;
+    bottom: 10px;
+    display: none
+}
+.infoview {
+    position: absolute;
+    padding: 10px 15px;
+    border-radius:4px ;
+    border: 1px solid rgba(128,128,128,.5);
+    color:#fff;
+    background: rgba(0,0,0,.4);
+    box-shadow: 0 3px 14px rgba(128,128,128,.5);
+    z-index: 999;
+    opacity: 0.8;
+}
+
 </style>

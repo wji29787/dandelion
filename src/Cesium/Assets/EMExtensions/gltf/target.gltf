@@ -1,0 +1,750 @@
+{
+    "accessors": {
+        "accessor_100": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 2392,
+            "byteStride": 2,
+            "componentType": 5120,
+            "count": 50,
+            "max": [
+                127,
+                0
+            ],
+            "min": [
+                127,
+                0
+            ],
+            "type": "VEC2"
+        },
+        "accessor_16": {
+            "bufferView": "bufferView_102",
+            "byteOffset": 0,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 72,
+            "max": [
+                13
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "accessor_18": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "componentType": 5126,
+            "count": 26,
+            "max": [
+                0,
+                5.099999904632568,
+                5.099999904632568
+            ],
+            "min": [
+                0,
+                -5.099999904632568,
+                -5.099999904632568
+            ],
+            "type": "VEC3"
+        },
+        "accessor_20": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 312,
+            "byteStride": 2,
+            "componentType": 5120,
+            "count": 26,
+            "max": [
+                127,
+                0
+            ],
+            "min": [
+                127,
+                0
+            ],
+            "type": "VEC2"
+        },
+        "accessor_36": {
+            "bufferView": "bufferView_102",
+            "byteOffset": 144,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 84,
+            "max": [
+                15
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "accessor_38": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 364,
+            "byteStride": 12,
+            "componentType": 5126,
+            "count": 30,
+            "max": [
+                0,
+                10.100000381469727,
+                9.846879959106445
+            ],
+            "min": [
+                0,
+                -10.100000381469727,
+                -9.847079277038574
+            ],
+            "type": "VEC3"
+        },
+        "accessor_40": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 724,
+            "byteStride": 2,
+            "componentType": 5120,
+            "count": 30,
+            "max": [
+                127,
+                0
+            ],
+            "min": [
+                127,
+                0
+            ],
+            "type": "VEC2"
+        },
+        "accessor_56": {
+            "bufferView": "bufferView_102",
+            "byteOffset": 312,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 96,
+            "max": [
+                17
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "accessor_58": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 784,
+            "byteStride": 12,
+            "componentType": 5126,
+            "count": 34,
+            "max": [
+                0,
+                15.100000381469727,
+                15.100000381469727
+            ],
+            "min": [
+                0,
+                -15.100000381469727,
+                -15.100000381469727
+            ],
+            "type": "VEC3"
+        },
+        "accessor_60": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 1192,
+            "byteStride": 2,
+            "componentType": 5120,
+            "count": 34,
+            "max": [
+                127,
+                0
+            ],
+            "min": [
+                127,
+                0
+            ],
+            "type": "VEC2"
+        },
+        "accessor_76": {
+            "bufferView": "bufferView_102",
+            "byteOffset": 504,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 108,
+            "max": [
+                19
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "accessor_78": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 1260,
+            "byteStride": 12,
+            "componentType": 5126,
+            "count": 38,
+            "max": [
+                0,
+                20.100000381469727,
+                19.7947998046875
+            ],
+            "min": [
+                0,
+                -20.100000381469727,
+                -19.79509925842285
+            ],
+            "type": "VEC3"
+        },
+        "accessor_80": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 1716,
+            "byteStride": 2,
+            "componentType": 5120,
+            "count": 38,
+            "max": [
+                127,
+                0
+            ],
+            "min": [
+                127,
+                0
+            ],
+            "type": "VEC2"
+        },
+        "accessor_96": {
+            "bufferView": "bufferView_102",
+            "byteOffset": 720,
+            "byteStride": 2,
+            "componentType": 5123,
+            "count": 144,
+            "max": [
+                25
+            ],
+            "min": [
+                0
+            ],
+            "type": "SCALAR"
+        },
+        "accessor_98": {
+            "bufferView": "bufferView_103",
+            "byteOffset": 1792,
+            "byteStride": 12,
+            "componentType": 5126,
+            "count": 50,
+            "max": [
+                0,
+                25.100000381469727,
+                25.100000381469727
+            ],
+            "min": [
+                0,
+                -25.100000381469727,
+                -25.100000381469727
+            ],
+            "type": "VEC3"
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@5615a4b07622d550a8e9bf110997b084cbbb8960",
+        "premultipliedAlpha": true,
+        "profile": {
+            "api": "WebGL",
+            "version": "1.0.2"
+        },
+        "version": "1.0.1"
+    },
+    "bufferViews": {
+        "bufferView_102": {
+            "buffer": "target",
+            "byteLength": 1008,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_103": {
+            "buffer": "target",
+            "byteLength": 2492,
+            "byteOffset": 1008,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "target": {
+            "byteLength": 3500,
+            "type": "arraybuffer",
+            "uri": "data:application/octet-stream;base64,AAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAAAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAAAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAHAAeAB0AHgAfAB0AHgAgAB8AIAAhAB8AAAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAHAAeAB0AHgAfAB0AHgAgAB8AIAAhAB8AIAAiACEAIgAjACEAIgAkACMAJAAlACMAAAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAHAAeAB0AHgAfAB0A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"
+        }
+    },
+    "materials": {
+        "Bullseye-Revolve-effect": {
+            "name": "Bullseye-Revolve-material",
+            "technique": "technique0",
+            "values": {
+                "ambient": [
+                    1,
+                    1,
+                    0,
+                    1
+                ],
+                "diffuse": [
+                    1,
+                    1,
+                    0,
+                    1
+                ],
+                "emission": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "shininess": 0,
+                "specular": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        },
+        "Bullseye-Revolve-effect-2": {
+            "name": "Bullseye-Revolve-material-2",
+            "technique": "technique0",
+            "values": {
+                "ambient": [
+                    1,
+                    0,
+                    0,
+                    1
+                ],
+                "diffuse": [
+                    1,
+                    0,
+                    0,
+                    1
+                ],
+                "emission": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "shininess": 0,
+                "specular": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        },
+        "Bullseye-Revolve-effect-3": {
+            "name": "Bullseye-Revolve-material-3",
+            "technique": "technique0",
+            "values": {
+                "ambient": [
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                "diffuse": [
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                "emission": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "shininess": 0,
+                "specular": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        },
+        "Bullseye-Revolve-effect-4": {
+            "name": "Bullseye-Revolve-material-4",
+            "technique": "technique0",
+            "values": {
+                "ambient": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "diffuse": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "emission": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "shininess": 0,
+                "specular": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        },
+        "Bullseye-Revolve-effect-5": {
+            "name": "Bullseye-Revolve-material-5",
+            "technique": "technique0",
+            "values": {
+                "ambient": [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "diffuse": [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "emission": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "shininess": 0,
+                "specular": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        }
+    },
+    "meshes": {
+        "Bullseye-Revolve-geometry": {
+            "name": "Bullseye-Revolve-geometry",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_20",
+                        "POSITION": "accessor_18"
+                    },
+                    "indices": "accessor_16",
+                    "material": "Bullseye-Revolve-effect",
+                    "mode": 4
+                }
+            ]
+        },
+        "Bullseye-Revolve-geometry-2": {
+            "name": "Bullseye-Revolve-geometry-2",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_40",
+                        "POSITION": "accessor_38"
+                    },
+                    "indices": "accessor_36",
+                    "material": "Bullseye-Revolve-effect-2",
+                    "mode": 4
+                }
+            ]
+        },
+        "Bullseye-Revolve-geometry-3": {
+            "name": "Bullseye-Revolve-geometry-3",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_60",
+                        "POSITION": "accessor_58"
+                    },
+                    "indices": "accessor_56",
+                    "material": "Bullseye-Revolve-effect-3",
+                    "mode": 4
+                }
+            ]
+        },
+        "Bullseye-Revolve-geometry-4": {
+            "name": "Bullseye-Revolve-geometry-4",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_80",
+                        "POSITION": "accessor_78"
+                    },
+                    "indices": "accessor_76",
+                    "material": "Bullseye-Revolve-effect-4",
+                    "mode": 4
+                }
+            ]
+        },
+        "Bullseye-Revolve-geometry-5": {
+            "name": "Bullseye-Revolve-geometry-5",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_100",
+                        "POSITION": "accessor_98"
+                    },
+                    "indices": "accessor_96",
+                    "material": "Bullseye-Revolve-effect-5",
+                    "mode": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "node_0": {
+            "children": [],
+            "matrix": [
+                -0.000000043711398944878965,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                -0.000000043711398944878965,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Bullseye-Revolve-geometry"
+            ],
+            "name": ""
+        },
+        "node_1": {
+            "children": [],
+            "matrix": [
+                -0.000000043711398944878965,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                -0.000000043711398944878965,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Bullseye-Revolve-geometry-2"
+            ],
+            "name": ""
+        },
+        "node_2": {
+            "children": [],
+            "matrix": [
+                -0.000000043711398944878965,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                -0.000000043711398944878965,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Bullseye-Revolve-geometry-3"
+            ],
+            "name": ""
+        },
+        "node_3": {
+            "children": [],
+            "matrix": [
+                -0.000000043711398944878965,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                -0.000000043711398944878965,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Bullseye-Revolve-geometry-4"
+            ],
+            "name": ""
+        },
+        "node_4": {
+            "children": [],
+            "matrix": [
+                -0.000000043711398944878965,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                -0.000000043711398944878965,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Bullseye-Revolve-geometry-5"
+            ],
+            "name": ""
+        },
+        "node_5": {
+            "children": [
+                "node_0",
+                "node_1",
+                "node_2",
+                "node_3",
+                "node_4"
+            ],
+            "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "name": "Y_UP_Transform"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "target0FS",
+            "vertexShader": "target0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "node_5"
+            ]
+        }
+    },
+    "shaders": {
+        "target0FS": {
+            "type": 35632,
+            "uri": "data:text/plain;base64,cHJlY2lzaW9uIGhpZ2hwIGZsb2F0Owp2YXJ5aW5nIHZlYzMgdl9ub3JtYWw7CnVuaWZvcm0gdmVjNCB1X2FtYmllbnQ7CnVuaWZvcm0gdmVjNCB1X2RpZmZ1c2U7CnVuaWZvcm0gdmVjNCB1X2VtaXNzaW9uOwp1bmlmb3JtIHZlYzQgdV9zcGVjdWxhcjsKdW5pZm9ybSBmbG9hdCB1X3NoaW5pbmVzczsKdm9pZCBtYWluKHZvaWQpIHsKdmVjMyBub3JtYWwgPSBub3JtYWxpemUodl9ub3JtYWwpOwppZiAoZ2xfRnJvbnRGYWNpbmcgPT0gZmFsc2UpIG5vcm1hbCA9IC1ub3JtYWw7CnZlYzQgY29sb3IgPSB2ZWM0KDAuLCAwLiwgMC4sIDAuKTsKdmVjNCBkaWZmdXNlID0gdmVjNCgwLiwgMC4sIDAuLCAxLik7CnZlYzQgZW1pc3Npb247CnZlYzQgYW1iaWVudDsKdmVjNCBzcGVjdWxhcjsKYW1iaWVudCA9IHVfYW1iaWVudDsKZGlmZnVzZSA9IHVfZGlmZnVzZTsKZW1pc3Npb24gPSB1X2VtaXNzaW9uOwpzcGVjdWxhciA9IHVfc3BlY3VsYXI7CmRpZmZ1c2UueHl6ICo9IG1heChkb3Qobm9ybWFsLHZlYzMoMC4sMC4sMS4pKSwgMC4pOwpjb2xvci54eXogKz0gZGlmZnVzZS54eXo7CmNvbG9yLnh5eiArPSBlbWlzc2lvbi54eXo7CmNvbG9yID0gdmVjNChjb2xvci5yZ2IgKiBkaWZmdXNlLmEsIGRpZmZ1c2UuYSk7CmdsX0ZyYWdDb2xvciA9IGNvbG9yOwp9Cg=="
+        },
+        "target0VS": {
+            "type": 35633,
+            "uri": "data:text/plain;base64,Y29uc3QgZmxvYXQgbm9ybWFsTXVsdGlwbGllciA9IDAuMDA3ODc0MDE1NzQ4MDMxNTsKdmVjMiBzaWduTm90WmVybyh2ZWMyIHYpCnsKICByZXR1cm4gdmVjMigodi54ID49IDAuMCkgPyArMS4wIDogLTEuMCwgKHYueSA+PSAwLjApID8gKzEuMCA6IC0xLjApOwp9CnZlYzMgb2N0X3RvX2Zsb2F0MzJ4Myh2ZWMyIGUpCnsKICB2ZWMzIHYgPSB2ZWMzKGUueHksIDEuMCAtIGFicyhlLngpIC0gYWJzKGUueSkpOwogIGlmICh2LnogPCAwLjApCiAgICAgIHYueHkgPSAoMS4wIC0gYWJzKHYueXgpKSAqIHNpZ25Ob3RaZXJvKHYueHkpOwogIHJldHVybiBub3JtYWxpemUodik7Cn0KcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OwphdHRyaWJ1dGUgdmVjMyBhX3Bvc2l0aW9uOwphdHRyaWJ1dGUgdmVjMiBhX25vcm1hbDsKdmFyeWluZyB2ZWMzIHZfbm9ybWFsOwp1bmlmb3JtIG1hdDMgdV9ub3JtYWxNYXRyaXg7CnVuaWZvcm0gbWF0NCB1X21vZGVsVmlld01hdHJpeDsKdW5pZm9ybSBtYXQ0IHVfcHJvamVjdGlvbk1hdHJpeDsKdm9pZCBtYWluKHZvaWQpIHsKdmVjNCBwb3MgPSB1X21vZGVsVmlld01hdHJpeCAqIHZlYzQoYV9wb3NpdGlvbiwxLjApOwp2X25vcm1hbCA9IG5vcm1hbGl6ZSh1X25vcm1hbE1hdHJpeCAqIG9jdF90b19mbG9hdDMyeDMoYV9ub3JtYWwqbm9ybWFsTXVsdGlwbGllcikpOwpnbF9Qb3NpdGlvbiA9IHVfcHJvamVjdGlvbk1hdHJpeCAqIHBvczsKfQoK"
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "attributes": {
+                "a_normal": "normal",
+                "a_position": "position"
+            },
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "diffuse": {
+                    "semantic": "_3DTILESDIFFUSE",
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                },
+                "shininess": {
+                    "type": 5126
+                },
+                "specular": {
+                    "type": 35666
+                }
+            },
+            "program": "program_0",
+            "states": {
+                "enable": [
+                    2929
+                ]
+            },
+            "uniforms": {
+                "u_ambient": "ambient",
+                "u_diffuse": "diffuse",
+                "u_emission": "emission",
+                "u_modelViewMatrix": "modelViewMatrix",
+                "u_normalMatrix": "normalMatrix",
+                "u_projectionMatrix": "projectionMatrix",
+                "u_shininess": "shininess",
+                "u_specular": "specular"
+            }
+        }
+    }
+}

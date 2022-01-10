@@ -1,0 +1,1 @@
+http://192.168.5.3:8080/earthview/services

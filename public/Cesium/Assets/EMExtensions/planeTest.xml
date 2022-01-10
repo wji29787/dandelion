@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<plane>
+		<model type="0" modelname="J20" 	modelscale="150" />
+		<model type="1" modelname="J10C" 	modelscale="800" />
+		<model type="2" modelname="J11B" 	modelscale="800" />
+		<model type="3" modelname="J16" 	modelscale="150" />
+		<model type="4" modelname="J10A" 	modelscale="5000" />
+		<model type="5" modelname="J10B" 	modelscale="200" />
+		<model type="6" modelname="J11BS" 	modelscale="10000" />
+		<model type="7" modelname="Su27" 	modelscale="10000" />
+		<model type="8" modelname="Su30" 	modelscale="5000" />
+		<model type="9" modelname="J10S" 	modelscale="1000000000" />
+		<model type="10" modelname="JH7A" 	modelscale="3000" />
+		<model type="11" modelname="J8F" 	modelscale="100" />
+		<model type="12" modelname="JZ8F" 	modelscale="150" />
+		<model type="13" modelname="JJo9" 	modelscale="150" />
+		<model type="14" modelname="Jo10" 	modelscale="150" />
+		<model type="15" modelname="Yun8" 	modelscale="100" />
+		<model type="16" modelname="H6" 	modelscale="100" />
+		<model type="17" modelname="WZ7WRJ" modelscale="100" />
+		<model type="18" modelname="Tu154" 	modelscale="8" />
+		<model type="19" modelname="Yun8G" 	modelscale="5" />
+		<model type="20" modelname="Yun9" 	modelscale="100" />
+		<model type="21" modelname="Mi171" 	modelscale="100" />
+		<model type="22" modelname="YiEr78" modelscale="50" />
+		<model type="23" modelname="YiEr76" modelscale="50" />
+		<model type="24" modelname="z9" modelscale="100" />
+		<model type="25" modelname="Cesium_Air" modelscale="100" />
+	</plane> 
+	<gtspi>
+		<model type="26" modelname="CarRadar0" 	modelscale="50000" />
+		<model type="27" modelname="CarRadar1" 	modelscale="30000" />
+		<model type="28" modelname="CarRadar2" 	modelscale="500" />
+		<model type="29" modelname="CarRadar3" 	modelscale="300" />
+		<model type="30" modelname="CarRadar4" 	modelscale="20000" />
+		<model type="31" modelname="H6QFaSheChe" 	modelscale="10000" />
+		<model type="32" modelname="HQ9FaSheChe" 	modelscale="50000" />
+		<model type="33" modelname="HQ12FaSheChe" 	modelscale="8000" />
+		<model type="34" modelname="HQ22che" 	modelscale="30000" />
+		<model type="35" modelname="YouErChe" 	modelscale="40000" />
+		<model type="36" modelname="YouErChe0" 	modelscale="30000" />
+		<model type="37" modelname="ZhiKongChe" 	modelscale="15000" />
+		<model type="38" modelname="92BZC" 	modelscale="1000" />
+	</gtspi>
+</root>

@@ -1,5 +1,11 @@
 import axios from "axios";
 import { requestHeader, sign } from "constants";
+import { ADD_STACK_ITEM, DEL_STACK_ITEM } from "../mutation-types";
+
+
+
+
+
 
 
 const store = {
@@ -105,6 +111,7 @@ const store = {
         categoryList2:list
       })
     },
+    // 获取属性列表
     async getAttrList (_,paload={}) {
      const { id,type } = paload
       let formData = {
@@ -144,7 +151,21 @@ const store = {
       
     },
      async merge({ commit },paload){
-
+       const data = {
+        requestHeader: requestHeader,
+        sign: sign,
+        payload:{
+          ...paload
+        }
+       }
+       store.commit(`commons/${ADD_STACK_ITEM}`, data,{root:true});
+       const res = await   axios.post("/dandelion/api/v1/hazard-item/merge", data).catch((error) => {
+                 commit(`commons/${DEL_STACK_ITEM}`, data,{root:true});
+            });
+        commit(`commons/${DEL_STACK_ITEM}`, data,{root:true});  
+        return res  
+    },
+    async gategoryAdd({ dispatch },paload){
       const { itemAttrs ,fileList,itemName,categoryId} = paload
       let attrs = [];
       for (let index = 0; index < itemAttrs.length; index++) {
@@ -176,14 +197,119 @@ const store = {
       if (attrs.length > 0) {
         item.itemAttrs = attrs;
       }
-      const formData = {
-        requestHeader: requestHeader,
-        sign: sign,
-        payload: {
-          item,
-        },
+    
+      return dispatch('merge',{item})
+    },
+ async gategoryEdit({ dispatch },paload){
+      const { itemAttrs ,fileList,itemName,categoryId,id,nodeColor} = paload
+      let attrs = [];
+      let itemImg;
+      for (let index = 0; index < itemAttrs.length; index++) {
+        const element = itemAttrs[index];
+        if(element.mediaType==1){
+          const attr = {
+            mediaType: 1,
+            attrName: element.attrName,
+            attrValue: element.attrValue,
+          }
+          if(element.id){
+            attr.id = element.id;
+          }
+          attrs.push(attr);
+        }else {
+          itemImg = element;
+        }
+      
+      }
+    
+      if (fileList.length) {
+        let attrValue = [];
+        for (let index = 0; index < fileList.length; index++) {
+          const element = fileList[index];
+          if(element.url){
+            attrValue.push(element.url);
+          }else {
+            attrValue.push(await getBase64(element.originFileObj));
+          }
+        
+        }
+        let imgAttr = {
+          mediaType: 2,
+          attrName: "图片",
+          attrValue: attrValue.join("@"),
+        }
+        if(itemImg){
+          imgAttr.id = itemImg.id
+        }
+        attrs.push(imgAttr);
+      }
+      const item = {
+        itemName,
+        categoryId,
+        nodeColor,
+        id,
+        itemAttrs: attrs,
       };
-      return  axios.post("/dandelion/api/v1/hazard-item/merge", formData)
+     
+      return dispatch('merge',{item})
+    },
+    //属性添加
+    relationAdd({ dispatch },paload){
+      // if (!modelCategoryType.select) {
+      //   message.info("关系不能为空");
+      // }
+      const { select,id,itemName,categoryId,relation, item}  =paload
+      const current = getCurrentRations(categoryList2, modelCategoryType.select);
+      
+      // let formData = {
+      //   requestHeader: requestHeader,
+      //   sign: sign,
+      //   payload: {
+      //     item: {
+      //       id: item.getModel().source,
+      //       itemName: item.getSource().getModel().label,
+      //       categoryId: item.getSource().getModel().categoryId,
+      //       relations: [
+      //         {
+      //           relationName: current.category,
+      //           categoryId: current.id,
+      //           items: [
+      //             {
+      //               id: item.getModel().target,
+      //               categoryId: item.getTarget().getModel().categoryId,
+      //               itemName: item.getTarget().getModel().label,
+      //             },
+      //           ],
+      //         },
+      //       ],
+      //     },
+      //   },
+      // };
+      const payload = {
+        item :{
+          id,
+          itemName,
+          categoryId,
+          relations:[
+           {
+            relationName:relation.category,
+            categoryId:relation.id,
+            items:[
+               {
+                 id:item.id,
+                 categoryId:item.categoryId,
+                 itemName:item.itemName,
+               }
+            ]
+           }
+          ]
+
+        }
+      }
+      return dispatch('merge',payload)
+    },
+    relationEdit({ dispatch },paload){
+      return dispatch('merge',payload)
     },
     load(_,paload){
 
