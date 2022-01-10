@@ -339,7 +339,8 @@ onUnmounted(()=>{
     viewIns = null
   }
   if(viewer){
-
+     Cesium.destroyObject(viewer)
+     viewer = null;
   }
  
 })
