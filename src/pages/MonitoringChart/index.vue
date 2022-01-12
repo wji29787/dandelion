@@ -204,6 +204,28 @@ let viewIns = null
 const formData = reactive({
       model:''
 })
+
+
+// 创建图片
+const createPiew = ()=>{
+   viewIns = new Viewer(document.getElementById('images'), {
+    inline: true,
+    viewed() {
+      viewIns.zoomTo(0.7);
+    },
+    ready(){
+      setPic()
+    },
+    backdrop: false,
+    button: false,
+    toolbar: false,
+    minHeight: 700,
+    fullscreen: false,
+    navbar:false
+    // movable: false
+  });
+
+}
 const timeSLider = ref(0);
 const showSlider = ref(false)
 const masks = ref({
@@ -312,25 +334,7 @@ let viewer =null;
     }
 
 onMounted(() => {
-  // View an image.
-  //  viewIns = new Viewer(document.getElementById('images'), {
-  //   inline: true,
-  //   viewed() {
-  //     viewIns.zoomTo(0.7);
-  //   },
-  //   ready(){
-  //     setPic()
-  //   },
-  //   backdrop: false,
-  //   button: false,
-  //   toolbar: false,
-  //   minHeight: 700,
-  //   fullscreen: false,
-  //   navbar:false
-  //   // movable: false
-  // });
-    console.log(EV_DemoData)
-    // console.log(Cesium)
+ 
     startup()
 });
 onUnmounted(()=>{

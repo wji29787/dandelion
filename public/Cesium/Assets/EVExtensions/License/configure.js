@@ -1,1 +1,1 @@
-http://192.168.5.3:8080/earthview/services
+https://39.102.74.122:13007

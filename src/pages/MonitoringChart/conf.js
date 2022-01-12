@@ -14,11 +14,11 @@ let dataConfig = {
     // 全球影像1
     globalImage1: {
       name: "Imagery_Mector_全球表皮",     //发布名称
-      url: 0,                         //GIS-Server索引
+      url: 'https://39.102.74.122:13007',                         //GIS-Server索引
     },
     // 全球影像2
     globalImage2: {
-      name: "111",
+      name: "gis",
       url: 1
     },
     // 四川省影像
