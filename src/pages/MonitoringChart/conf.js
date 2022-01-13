@@ -13,13 +13,13 @@ let dataConfig = {
   IMAGE: {
     // 全球影像1
     globalImage1: {
-      name: "Imagery_Mector_全球表皮",     //发布名称
-      url: 'https://39.102.74.122:13007',                         //GIS-Server索引
+      name: "henanDOM2m_ev",     //发布名称
+      url: 'http://39.102.74.122:13007',                         //GIS-Server索引
     },
     // 全球影像2
     globalImage2: {
-      name: "gis",
-      url: 1
+      name: "世界_DOM墨卡托_1至9级",
+      url: 'http://39.102.74.122:13007'
     },
     // 四川省影像
     sichuan: {
@@ -61,6 +61,7 @@ let dataConfig = {
 
 // 常用数据设置
 let globalImage = dataConfig.IMAGE.globalImage1;
+let globalImage2 = dataConfig.IMAGE.globalImage2;
 
 // 相机操作方式
 let cameraControllerType = {
@@ -76,6 +77,7 @@ const EV_DemoData = {
     Image:{
         // GIS-Server影像
       "01_GIS-Server": globalImage,
+      "02_GIS-Server": globalImage2,
     }
   },
   cameraControllerType: cameraControllerType.defaultType,         //设置相机操作方式

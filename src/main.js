@@ -2,8 +2,8 @@ import { createApp } from "vue";
 
 import VueAxios from "vue-axios";
 import {  message } from 'ant-design-vue';
-// import axios from "./api/request";
-import axios from "axios";
+import axios from "./utils/request";
+// import axios from "axios";
 import App from "./App.vue";
 import Router from "./router";
 import store from "./store";

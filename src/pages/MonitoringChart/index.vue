@@ -287,6 +287,7 @@ let viewer =null;
         const Cesium = window.Cesium
         // main.js中配置的demo数据
         let data = EV_DemoData.Primer.Image["01_GIS-Server"];       
+        let data2 = EV_DemoData.Primer.Image["02_GIS-Server"];       
         let cameraControllerType = EV_DemoData.cameraControllerType;    //相机操作方式设置
 
          viewer = new Cesium.Viewer('cesiumContainer',{
@@ -320,17 +321,22 @@ let viewer =null;
         let evLayerManager = new Cesium.EV_LayerManager(scene);
         // 加载影像
         let imageLayer = evLayerManager.add({
-          name: data.name,                          //图层名称
-          url: data.url,                            //GIS-Server地址
+          name: "世界_DOM墨卡托_1至9级",                          //图层名称
+          url: 'http://39.102.74.122:13007',                            //GIS-Server地址
           type: Cesium.EV_LayerType.IMAGE,          //图层类型
-          queryParam: data.queryParam,              //请求参数
+          // queryParam: data.queryParam,              //请求参数
         });
-        
+        console.log('play',imageLayer)
+         imageLayer.readyPromise.then(()=>{
+           viewer.camera.flyTo({
+             destination:imageLayer.rectangle
+           })
+         })
         // 设置相机操作方式
-        if (cameraControllerType) {
-            let evCameraController = new Cesium.EV_CameraControllerType(viewer);
-            evCameraController[cameraControllerType]();
-        }
+        // if (cameraControllerType) {
+        //     let evCameraController = new Cesium.EV_CameraControllerType(viewer);
+        //     evCameraController[cameraControllerType]();
+        // }
     }
 
 onMounted(() => {
