@@ -285,6 +285,7 @@ let viewer =null;
 
  function startup() {
         const Cesium = window.Cesium
+        console.log(Cesium)
         // main.js中配置的demo数据
         let data = EV_DemoData.Primer.Image["01_GIS-Server"];       
         let data2 = EV_DemoData.Primer.Image["02_GIS-Server"];       
@@ -312,25 +313,46 @@ let viewer =null;
                 },
             })
         });
-
+        /**
+         * http://47.94.8.209:8080/earthview/services/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayerName=GlobalMercator%2C%E6%B9%96%E5%8C%97%E7%9C%81
+http://47.94.8.209:8080/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayerName=GlobalMercator%2C%E6%B9%96%E5%8C%97%E7%9C%81
+         * 
+         * 
+        */
+        // const names = ['GlobalMercator','湖北省'];  // "henanDOM2m_ev"
+        const names = ['世界_DOM墨卡托_1至9级','上海2mDOM_ev'];  // "henanDOM2m_ev"
+         //  const names ='世界_DOM墨卡托_1至9级';  // "henanDOM2m_ev"
+        // const names ='上海2mDOM_ev';  // "henanDOM2m_ev"
+        // const names =['GlobalMercator'];  // "henanDOM2m_ev"
+        // const names =['上海2mDOM_ev'];  // "henanDOM2m_ev"
+       
+        // const serverUrl = 'http://aimsky.cn';
+        // const serverUrl = 'http://47.94.8.209:8080';
+         const serverUrl = 'http://39.102.74.122:13007'
         const scene = viewer.scene;
         scene.debugShowFramesPerSecond = true;                      //显示帧率
         // viewer.extend(Cesium.viewerCesiumInspectorMixin);      
-
+       
         // 创建图层管理器
         let evLayerManager = new Cesium.EV_LayerManager(scene);
-        // 加载影像
+        // 加载影像   // henanDOM2m_ev  世界_DOM墨卡托_1至9级
         let imageLayer = evLayerManager.add({
-          name: "世界_DOM墨卡托_1至9级",                          //图层名称
-          url: 'http://39.102.74.122:13007',                            //GIS-Server地址
-          type: Cesium.EV_LayerType.IMAGE,          //图层类型
+          name: names,                          //图层名称
+          url: serverUrl,                            //GIS-Server地址
+          type: Cesium.EV_LayerType.IMAGE,    //图层类型
+          tileType:Cesium.EV_TileAlgorithmType.WebMercator,        // 投影类型
           // queryParam: data.queryParam,              //请求参数
+          format:"image/png",
+          imageOption: {}	
         });
-        console.log('play',imageLayer)
+        // console.log('play',imageLayer)
          imageLayer.readyPromise.then(()=>{
-           viewer.camera.flyTo({
-             destination:imageLayer.rectangle
-           })
+          //  viewer.camera.flyTo({
+          //    destination:imageLayer.rectangle
+          //  })
+          	// viewer.camera.setView({
+            //   destination: Cesium.Cartesian3.fromDegrees(111,38,18000000)
+            // });
          })
         // 设置相机操作方式
         // if (cameraControllerType) {

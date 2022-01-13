@@ -58,6 +58,12 @@ export default defineConfig({
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/dandelion\/api\/v1/, '/goalie/api/v3')
       },
+      // "/dandelion/api/v1": {
+      //   target: "http://39.102.74.122:13006",
+      //   // target: 'http://localhost:8888',
+      //   changeOrigin: true,
+      //   // rewrite: (path) => path.replace(/^\/dandelion\/api\/v1/, '/goalie/api/v3')
+      // },
     },
   },
 });
