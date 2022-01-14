@@ -163,7 +163,7 @@ import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
 
 // import { Cesium } from './Cesium'
-import {  planPaths ,EV_DemoData} from './conf'
+import {  planPaths ,EV_Data} from './conf'
 
 import  bzy from './img/bzy.jpg';
 import  normal from './img/normal.jpg';
@@ -286,10 +286,10 @@ let viewer =null;
  function startup() {
         const Cesium = window.Cesium
         console.log(Cesium)
-        // main.js中配置的demo数据
-        let data = EV_DemoData.Primer.Image["01_GIS-Server"];       
-        let data2 = EV_DemoData.Primer.Image["02_GIS-Server"];       
-        let cameraControllerType = EV_DemoData.cameraControllerType;    //相机操作方式设置
+         
+         
+        const dataConf = EV_Data.Primer; 
+        let cameraControllerType = EV_Data.cameraControllerType;    //相机操作方式设置
 
          viewer = new Cesium.Viewer('cesiumContainer',{
             animation: false,
@@ -320,40 +320,67 @@ http://47.94.8.209:8080/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayer
          * 
         */
         // const names = ['GlobalMercator','湖北省'];  // "henanDOM2m_ev"
-        const names = ['世界_DOM墨卡托_1至9级','上海2mDOM_ev'];  // "henanDOM2m_ev"
+        // const names = ['世界_DOM墨卡托_1至9级','上海2mDOM_ev'];  // "henanDOM2m_ev"
          //  const names ='世界_DOM墨卡托_1至9级';  // "henanDOM2m_ev"
+         const names ='tianjin_dom_ev';  // "henanDOM2m_ev"
         // const names ='上海2mDOM_ev';  // "henanDOM2m_ev"
         // const names =['GlobalMercator'];  // "henanDOM2m_ev"
         // const names =['上海2mDOM_ev'];  // "henanDOM2m_ev"
        
         // const serverUrl = 'http://aimsky.cn';
         // const serverUrl = 'http://47.94.8.209:8080';
-         const serverUrl = 'http://39.102.74.122:13007'
+        //  const serverUrl = 'http://39.102.74.122:13007'
+         const serverUrl = 'http://49.5.9.35:18432'
         const scene = viewer.scene;
         scene.debugShowFramesPerSecond = true;                      //显示帧率
         // viewer.extend(Cesium.viewerCesiumInspectorMixin);      
        
         // 创建图层管理器
-        let evLayerManager = new Cesium.EV_LayerManager(scene);
+        const evLayerManager = new Cesium.EV_LayerManager(scene);
+        Object.keys(dataConf).forEach(key=>{
+          const type = Cesium.EV_LayerType[key];
+          const data =dataConf[key];
+          data.forEach(item=>{
+              // const { name,url }= item;
+            const layer =  evLayerManager.add({
+                 type,
+                 ...item
+              })
+
+            layer.readyPromise.then(()=>{
+              // viewer.camera.flyTo({
+              //       destination:imageLayer.rectangle
+              //     })
+                    // viewer.camera.setView({
+                    //   destination: Cesium.Cartesian3.fromDegrees(111,38,18000000)
+                    // });
+            })
+          }) 
+         
+        })
+
         // 加载影像   // henanDOM2m_ev  世界_DOM墨卡托_1至9级
-        let imageLayer = evLayerManager.add({
-          name: names,                          //图层名称
-          url: serverUrl,                            //GIS-Server地址
-          type: Cesium.EV_LayerType.IMAGE,    //图层类型
-          tileType:Cesium.EV_TileAlgorithmType.WebMercator,        // 投影类型
-          // queryParam: data.queryParam,              //请求参数
-          format:"image/png",
-          imageOption: {}	
-        });
+        // let imageLayer = evLayerManager.add({
+        //   name: names,                          //图层名称
+        //   url: serverUrl,                            //GIS-Server地址
+        //   type: Cesium.EV_LayerType.IMAGE,    //图层类型
+        //   tileType:Cesium.EV_TileAlgorithmType.WebMercator,        // 投影类型
+        //   // queryParam: data.queryParam,              //请求参数
+        //   format:"image/png",
+        //   imageOption: {}	
+        // });
+       
+    
+
         // console.log('play',imageLayer)
-         imageLayer.readyPromise.then(()=>{
+        //  imageLayer.readyPromise.then(()=>{
           //  viewer.camera.flyTo({
           //    destination:imageLayer.rectangle
           //  })
           	// viewer.camera.setView({
             //   destination: Cesium.Cartesian3.fromDegrees(111,38,18000000)
             // });
-         })
+        //  })
         // 设置相机操作方式
         // if (cameraControllerType) {
         //     let evCameraController = new Cesium.EV_CameraControllerType(viewer);

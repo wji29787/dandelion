@@ -8,82 +8,43 @@ export const planPaths = {
 
 
 
-let dataConfig = {
-     // 影像
-  IMAGE: {
-    // 全球影像1
-    globalImage1: {
-      name: "henanDOM2m_ev",     //发布名称
-      url: 'http://39.102.74.122:13007',                         //GIS-Server索引
-    },
-    // 全球影像2
-    globalImage2: {
-      name: "世界_DOM墨卡托_1至9级",
-      url: 'http://39.102.74.122:13007'
-    },
-    // 四川省影像
-    sichuan: {
-      name: 'image_sichuansheng_20190108',
-      url: 0
-    },
-    // 金寨高清
-    "金寨高清": {
-      name: '金寨高清',
-      url: 0
-    },
-    // 
-    rjy: {
-      name: 'rjy',
-      url: 0
-    },
-    // 湖北省影像服务组
-    hubeiGroup: {
-      name: "湖北",
-      url: 1
-    },
-    // 影像合并
-    imageMerge: {
-      name: ["111", "湖北省", "hubei_30"],
-      url: 1
-    },
-    // 北京影像
-    beijing: {
-      name: 'beijing_new',
-      url: 1
-    },
-    // 纯色地图
-    ZNmap: {
-      name: 'ZNmap',
-      url: 1
-    }
-  }, 
-}
-
-// 常用数据设置
-let globalImage = dataConfig.IMAGE.globalImage1;
-let globalImage2 = dataConfig.IMAGE.globalImage2;
-
 // 相机操作方式
 let cameraControllerType = {
     EV_Type: 'defaultControllerType',             //EV-Globe Desktop桌面版相机操作方式
     googleType: 'googleControllerType',           //谷歌相机操作方式
     defaultType: undefined                        //Cesium默认相机操作方式
 };
-const EV_DemoData = {
+const EV_Data = {
   
       // 基础图层
     Primer:{
         // 影像服务
-    Image:{
-        // GIS-Server影像
-      "01_GIS-Server": globalImage,
-      "02_GIS-Server": globalImage2,
-    }
+           
+        IMAGE: [
+            {
+            // 全球影像
+            name: "GlobalMercator",     //发布名称
+            url: 'http://49.5.9.35:18432' 
+            },
+            {
+            // 
+            name: "tianjin_dom_ev",     //发布名称
+            url: 'http://49.5.9.35:18432' 
+            },
+        ], 
+
+        DEM:[
+            {
+                name:'Dem_China30m',  // 最后这个数据是dem高程数据
+                url:'http://49.5.9.35:18432' 
+            }
+        ],
+        
   },
   cameraControllerType: cameraControllerType.defaultType,         //设置相机操作方式
 }
 
 
 export {
-    EV_DemoData
+    EV_Data
 }
