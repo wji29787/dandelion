@@ -17,15 +17,7 @@
         </a-form-item>
       <!-- </a-form> -->
       <div class="title">污染信息</div>
-      <!-- <a-form> -->
-        <a-form-item label="名称">
-          <a-input placeholder="污染物名称" />
-        </a-form-item>
-         <a-form-item label="类别">
-          <a-select placeholder="请选择类别" v-model:value="formData.type">
-            <a-select-option value="shanghai">化学品</a-select-option>
-          </a-select>
-        </a-form-item>
+       
         
       <template v-if="formData.model==='gsyt'">
          <a-form-item label="时间">
@@ -35,10 +27,10 @@
           <a-input placeholder="单位mg/m" />
         </a-form-item>
          <a-form-item label="风向">
-          <a-input placeholder="风向" />
+          <a-input placeholder="东向0" />
         </a-form-item>
          <a-form-item label="风速">
-          <a-input placeholder="风速" />
+          <a-input placeholder="风速m/s" />
         </a-form-item>
          <a-form-item label="区域">
            <a-select placeholder=""  :style="{overflow:'hidden'}" v-model:value="formData.area" >
@@ -48,8 +40,13 @@
         </a-form-item>
       </template>
        <template v-if="formData.model==='bzy'">
+        <a-form-item label="名称">
+          <a-select placeholder="请选择名称" v-model:value="formData.name">
+            <a-select-option value="shanghai">甲醇</a-select-option>
+          </a-select>
+        </a-form-item>
         <a-form-item label="总量">
-          <a-input placeholder="单位mg" />
+          <a-input placeholder="单位kg" />
         </a-form-item>
       </template>
        
@@ -75,16 +72,16 @@
           </div>
         </div>
     </div>
-    <!-- <div> -->
-      <!-- <ul id="images" style="display: none;"> -->
-        <!-- <li v-for="(pic,index) in picList" :key="index" ><img :src="pic" alt="Picture 1"></li> -->
-        <!-- <li><img :src="pics.bzy" alt="Picture 2"></li> -->
-        <!-- <li><img :src="pics.gsyt" alt="Picture 3"></li>
+    <div>
+      <ul id="images" style="display: none;">
+        <li v-for="(pic,index) in picList" :key="index" ><img :src="pic" alt="Picture 1"></li>
+        <!-- <li><img :src="pics.bzy" alt="Picture 2"></li>
+        <li><img :src="pics.gsyt" alt="Picture 3"></li>
         <li><img :src="pics.gsytlater" alt="Picture 3"></li> -->
-     <!-- </ul> -->
-    <!-- </div> -->
+     </ul>
+    </div>
     <!--时间轴-->
-    <div id="cesiumContainer" class="cesiumContainer"></div>
+    <!-- <div id="cesiumContainer" class="cesiumContainer"></div> -->
      <div class="time-box" v-if="showSlider">
        <a-form>
           <a-form-item  :colon="false">
@@ -202,7 +199,8 @@ const pics = {
 const picList = Object.keys(pics).map(key=>pics[key])
 let viewIns = null
 const formData = reactive({
-      model:''
+      model:'',
+      name:''
 })
 
 
@@ -252,16 +250,16 @@ const setPic = ()=>{
   }else {
     showSlider.value = false
   }
-  // if(formData.model){
+  if(formData.model){
     
-  //    viewIns.view(models[formData.model])
-  // }else {
-  //   viewIns.view(models[formData.normal])
-  // }
+     viewIns.view(models[formData.model])
+  }else {
+    viewIns.view(models[formData.normal])
+  }
 }
 watch(()=>formData.model,(model)=>{
    
-   setPic()
+  //  setPic()
 })
 const timeSLiderChange = (val)=>{
    const pot = {
@@ -272,7 +270,7 @@ const timeSLiderChange = (val)=>{
   
    }
    if(pot[val]){
-      // viewIns.view(pot[val])
+      viewIns.view(pot[val])
    }
 } 
 const gobiochemical = (key)=>{
@@ -281,7 +279,7 @@ const gobiochemical = (key)=>{
 
 
 // 地图
-let viewer =null;
+// let viewer =null;
 
  function startup() {
         const Cesium = window.Cesium
@@ -313,24 +311,7 @@ let viewer =null;
                 },
             })
         });
-        /**
-         * http://47.94.8.209:8080/earthview/services/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayerName=GlobalMercator%2C%E6%B9%96%E5%8C%97%E7%9C%81
-http://47.94.8.209:8080/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayerName=GlobalMercator%2C%E6%B9%96%E5%8C%97%E7%9C%81
-         * 
-         * 
-        */
-        // const names = ['GlobalMercator','湖北省'];  // "henanDOM2m_ev"
-        // const names = ['世界_DOM墨卡托_1至9级','上海2mDOM_ev'];  // "henanDOM2m_ev"
-         //  const names ='世界_DOM墨卡托_1至9级';  // "henanDOM2m_ev"
-         const names ='tianjin_dom_ev';  // "henanDOM2m_ev"
-        // const names ='上海2mDOM_ev';  // "henanDOM2m_ev"
-        // const names =['GlobalMercator'];  // "henanDOM2m_ev"
-        // const names =['上海2mDOM_ev'];  // "henanDOM2m_ev"
-       
-        // const serverUrl = 'http://aimsky.cn';
-        // const serverUrl = 'http://47.94.8.209:8080';
-        //  const serverUrl = 'http://39.102.74.122:13007'
-         const serverUrl = 'http://49.5.9.35:18432'
+
         const scene = viewer.scene;
         scene.debugShowFramesPerSecond = true;                      //显示帧率
         // viewer.extend(Cesium.viewerCesiumInspectorMixin);      
@@ -358,20 +339,6 @@ http://47.94.8.209:8080/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayer
           }) 
          
         })
-
-        // 加载影像   // henanDOM2m_ev  世界_DOM墨卡托_1至9级
-        // let imageLayer = evLayerManager.add({
-        //   name: names,                          //图层名称
-        //   url: serverUrl,                            //GIS-Server地址
-        //   type: Cesium.EV_LayerType.IMAGE,    //图层类型
-        //   tileType:Cesium.EV_TileAlgorithmType.WebMercator,        // 投影类型
-        //   // queryParam: data.queryParam,              //请求参数
-        //   format:"image/png",
-        //   imageOption: {}	
-        // });
-       
-    
-
         // console.log('play',imageLayer)
         //  imageLayer.readyPromise.then(()=>{
           //  viewer.camera.flyTo({
@@ -389,18 +356,18 @@ http://47.94.8.209:8080/EV_WebService/get/wmts/10000/GetWMTSLayersInfo?tileLayer
     }
 
 onMounted(() => {
- 
-    startup()
+     createPiew()
+    // startup()
 });
 onUnmounted(()=>{
   if(viewIns){
    viewIns.destroy();
     viewIns = null
   }
-  if(viewer){
-     Cesium.destroyObject(viewer)
-     viewer = null;
-  }
+  // if(viewer){
+  //    Cesium.destroyObject(viewer)
+  //    viewer = null;
+  // }
  
 })
 </script>
